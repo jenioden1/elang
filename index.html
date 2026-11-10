@@ -1,0 +1,2565 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Elang Priatim - Ekosistem Literasi Kebanksentralan Priangan Timur</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
+        rel="stylesheet">
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+    <style>
+        /* ==================== THEME VARIABLES (LIGHT & DARK) ==================== */
+        :root {
+            /* Palette Core */
+            --bi-navy-dark: #002554;
+            --bi-navy: #003B7A;
+            --bi-navy-light: #0A58CA;
+            --bi-blue-soft: #F0F5FD;
+            --bi-blue-border: #D0E1F9;
+            --gold-accent: #C5A046;
+            --gold-light: #EBD99F;
+            --gold-gradient: linear-gradient(135deg, #DFB75A 0%, #B88E31 100%);
+            --navy-gradient: linear-gradient(135deg, #002554 0%, #004B99 100%);
+
+            /* Surfaces & Text (Light Theme) */
+            --bg-body: #F8FAFD;
+            --bg-section-alt: #F1F5FA;
+            --navbar-bg: rgba(255, 255, 255, 0.94);
+            --navbar-border: rgba(0, 59, 122, 0.08);
+            --surface-card: #FFFFFF;
+            --surface-subtle: #F8FAFC;
+            --text-heading: #002554;
+            --text-title: #0F1D38;
+            --text-body: #475569;
+            --text-muted: #64748B;
+            --card-border: rgba(0, 59, 122, 0.08);
+            --card-border-hover: rgba(197, 160, 70, 0.5);
+            --search-bg: #FFFFFF;
+            --search-border: #CBD5E1;
+            --search-text: #0F1D38;
+
+            /* Ambient Glows (Light) */
+            --glow-orb-1: rgba(10, 88, 202, 0.12);
+            --glow-orb-2: rgba(223, 183, 90, 0.18);
+            --glow-orb-3: rgba(14, 165, 233, 0.10);
+            --grid-dots: rgba(0, 59, 122, 0.04);
+
+            /* Shadows & Radius */
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-xl: 26px;
+            --shadow-subtle: 0 4px 20px rgba(0, 37, 84, 0.05);
+            --shadow-card: 0 10px 30px rgba(0, 37, 84, 0.07);
+            --shadow-elevated: 0 18px 45px rgba(0, 37, 84, 0.12);
+            --shadow-gold: 0 8px 25px rgba(197, 160, 70, 0.3);
+            --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Dark Theme Variables */
+        [data-theme="dark"] {
+            --bg-body: #060D1A;
+            --bg-section-alt: #081224;
+            --navbar-bg: rgba(6, 13, 26, 0.94);
+            --navbar-border: rgba(223, 183, 90, 0.25);
+            --surface-card: #0D1B33;
+            --surface-subtle: #112240;
+            --text-heading: #F8FAFC;
+            --text-title: #FFFFFF;
+            --text-body: #CBD5E1;
+            --text-muted: #94A3B8;
+            --card-border: rgba(223, 183, 90, 0.25);
+            --card-border-hover: rgba(223, 183, 90, 0.7);
+            --bi-blue-soft: rgba(30, 64, 175, 0.25);
+            --bi-blue-border: rgba(96, 165, 250, 0.3);
+            --search-bg: #071224;
+            --search-border: rgba(223, 183, 90, 0.4);
+            --search-text: #FFFFFF;
+
+            /* Ambient Glows (Dark) */
+            --glow-orb-1: rgba(56, 189, 248, 0.22);
+            --glow-orb-2: rgba(223, 183, 90, 0.25);
+            --glow-orb-3: rgba(59, 130, 246, 0.25);
+            --grid-dots: rgba(223, 183, 90, 0.08);
+
+            --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.45);
+            --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.55);
+            --shadow-elevated: 0 18px 45px rgba(0, 0, 0, 0.75);
+            --shadow-gold: 0 8px 30px rgba(223, 183, 90, 0.4);
+        }
+
+        /* ==================== BASE STYLES ==================== */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 85px;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-body);
+            line-height: 1.65;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            position: relative;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1220px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ==================== MODERN GLOWING AMBIENT BACKGROUND ==================== */
+        .ambient-glow-wrapper {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.85;
+            will-change: transform;
+            transition: background 0.5s ease;
+        }
+
+        .glow-orb-1 {
+            top: -10%;
+            left: -5%;
+            width: 580px;
+            height: 580px;
+            background: var(--glow-orb-1);
+            animation: orbFloat1 22s ease-in-out infinite alternate;
+        }
+
+        .glow-orb-2 {
+            top: 25%;
+            right: -8%;
+            width: 640px;
+            height: 640px;
+            background: var(--glow-orb-2);
+            animation: orbFloat2 26s ease-in-out infinite alternate;
+        }
+
+        .glow-orb-3 {
+            bottom: 5%;
+            left: 10%;
+            width: 520px;
+            height: 520px;
+            background: var(--glow-orb-3);
+            animation: orbFloat3 20s ease-in-out infinite alternate;
+        }
+
+        .ambient-grid-overlay {
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(var(--grid-dots) 1.2px, transparent 1.2px);
+            background-size: 34px 34px;
+            opacity: 0.8;
+            mask-image: linear-gradient(180deg, #000 0%, transparent 95%);
+            -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 95%);
+        }
+
+        @keyframes orbFloat1 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(70px, 90px) scale(1.12);
+            }
+
+            100% {
+                transform: translate(-40px, 140px) scale(0.95);
+            }
+        }
+
+        @keyframes orbFloat2 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(-80px, -60px) scale(1.08);
+            }
+
+            100% {
+                transform: translate(-40px, 100px) scale(0.9);
+            }
+        }
+
+        @keyframes orbFloat3 {
+            0% {
+                transform: translate(0, 0) scale(0.95);
+            }
+
+            50% {
+                transform: translate(90px, -70px) scale(1.15);
+            }
+
+            100% {
+                transform: translate(30px, 40px) scale(1);
+            }
+        }
+
+        /* ==================== NAVBAR (HEADER) ==================== */
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: var(--navbar-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 1000;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.06);
+            border-bottom: 1px solid var(--navbar-border);
+            transition: var(--transition);
+        }
+
+        .navbar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+        }
+
+        .brand-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: transform 0.3s ease;
+        }
+
+        .brand-link:hover {
+            transform: translateY(-1px);
+        }
+
+        .brand-logo-img {
+            height: 52px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 8px rgba(0, 37, 84, 0.2));
+            background: #FFFFFF;
+            padding: 2px;
+            border-radius: 10px;
+        }
+
+        .brand-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            letter-spacing: -0.2px;
+            line-height: 1.15;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.3s ease;
+        }
+
+        .brand-name span.gold {
+            color: var(--gold-accent);
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-desc {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--gold-accent);
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        .nav-right-controls {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-link {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--text-title);
+            position: relative;
+            padding: 6px 0;
+            transition: var(--transition);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2.5px;
+            background: var(--gold-gradient);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--gold-accent);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-btn {
+            background: var(--gold-gradient);
+            color: #001A38 !important;
+            font-weight: 800;
+            padding: 8px 18px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(197, 160, 70, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(197, 160, 70, 0.5);
+        }
+
+        .nav-btn::after {
+            display: none !important;
+        }
+
+        /* Modern Dark Mode Toggle Pill */
+        .theme-toggle-btn {
+            background: var(--surface-subtle);
+            border: 1.5px solid var(--card-border);
+            color: var(--text-title);
+            padding: 6px 14px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transition: var(--transition);
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .theme-toggle-btn:hover {
+            border-color: var(--gold-accent);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(197, 160, 70, 0.25);
+        }
+
+        .theme-icon-circle {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--gold-gradient);
+            color: #001A38;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            transition: transform 0.4s ease;
+        }
+
+        .theme-toggle-btn:hover .theme-icon-circle {
+            transform: rotate(20deg);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            color: var(--text-title);
+            cursor: pointer;
+        }
+
+        /* ==================== SECTION CAROUSEL ==================== */
+        .carousel-section {
+            padding: 45px 0 55px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .section-title-wrap {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .section-subtitle {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--gold-accent);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            line-height: 1.25;
+            transition: color 0.3s ease;
+        }
+
+        .section-title span.gold {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-desc {
+            font-size: 0.98rem;
+            color: var(--text-muted);
+            max-width: 640px;
+            margin: 8px auto 0;
+            transition: color 0.3s ease;
+        }
+
+        .title-divider {
+            width: 64px;
+            height: 3px;
+            background: var(--gold-gradient);
+            border-radius: 3px;
+            margin-top: 12px;
+        }
+
+        /* ==================== 3-SLIDE CAROUSEL (CLEAN, ELEGANT, SEAMLESS LOOP) ==================== */
+        .carousel-card-container {
+            max-width: 1120px;
+            margin: 0 auto;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        .carousel-outer-frame {
+            position: relative;
+            padding: 10px 0;
+            background: transparent;
+        }
+
+        .main-carousel {
+            width: 100%;
+            padding: 20px 0 32px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .main-carousel .swiper-wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        .main-carousel .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 16 / 9;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            background: var(--surface-card);
+            border: 1.5px solid var(--card-border);
+            padding: 6px;
+            box-shadow: 0 4px 18px rgba(0, 37, 84, 0.06);
+            position: relative;
+            cursor: pointer;
+            /* Slide samping: sedikit pudar dan blur lembut */
+            opacity: 0.42;
+            transform: scale(0.86);
+            filter: blur(2.5px);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, filter, opacity;
+        }
+
+        .main-carousel .swiper-slide:not(.swiper-slide-active):hover {
+            opacity: 0.75;
+            filter: blur(1px);
+            transform: scale(0.89);
+            border-color: rgba(197, 160, 70, 0.45);
+        }
+
+        /* Slide Tengah Aktif: 100% Jelas, Tajam, Membesar, Berbingkai Emas BI */
+        .main-carousel .swiper-slide-active {
+            opacity: 1 !important;
+            transform: scale(1.02) !important;
+            filter: blur(0px) !important;
+            z-index: 10;
+            border: 2.5px solid var(--gold-accent) !important;
+            box-shadow: 0 16px 40px rgba(0, 37, 84, 0.16), 0 0 28px rgba(197, 160, 70, 0.25) !important;
+        }
+
+        [data-theme="dark"] .main-carousel .swiper-slide-active {
+            border-color: var(--gold-accent) !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 35px rgba(223, 183, 90, 0.35) !important;
+        }
+
+        .main-carousel .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: var(--surface-card);
+            border-radius: calc(var(--radius-xl) - 6px);
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        /* Nav Buttons */
+        .carousel-btn-prev,
+        .carousel-btn-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            background: var(--surface-card);
+            color: var(--text-title);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+            border: 1.5px solid var(--card-border);
+            cursor: pointer;
+            z-index: 25;
+            transition: var(--transition);
+        }
+
+        .carousel-btn-prev {
+            left: 2px;
+        }
+
+        .carousel-btn-next {
+            right: 2px;
+        }
+
+        .carousel-btn-prev:hover,
+        .carousel-btn-next:hover {
+            background: var(--gold-gradient);
+            color: #002554;
+            box-shadow: 0 8px 25px rgba(197, 160, 70, 0.45);
+            transform: translateY(-50%) scale(1.08);
+            border-color: var(--gold-accent);
+        }
+
+        @media (max-width: 768px) {
+            .carousel-btn-prev {
+                left: -6px;
+                width: 40px;
+                height: 40px;
+                font-size: 0.95rem;
+            }
+
+            .carousel-btn-next {
+                right: -6px;
+                width: 40px;
+                height: 40px;
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Dots pagination below frame */
+        .carousel-pagination-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 18px;
+            gap: 8px;
+        }
+
+        .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(100, 116, 139, 0.4);
+            opacity: 1;
+            transition: var(--transition);
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: var(--gold-gradient) !important;
+            width: 34px !important;
+            border-radius: 8px !important;
+            box-shadow: 0 2px 10px rgba(197, 160, 70, 0.5);
+        }
+
+        /* ==================== MATERI EDUKASI SECTION ==================== */
+        .materi-section {
+            padding: 60px 0 90px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Filter Controls */
+        .filter-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 36px;
+            background: var(--surface-card);
+            padding: 12px 18px;
+            border-radius: 50px;
+            box-shadow: var(--shadow-subtle);
+            border: 1px solid var(--card-border);
+            transition: var(--transition);
+        }
+
+        .tab-button-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            background: transparent;
+            border: none;
+            padding: 9px 22px;
+            border-radius: 50px;
+            font-family: inherit;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-body);
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-tab i {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .filter-tab:hover {
+            color: var(--text-title);
+            background: var(--surface-subtle);
+        }
+
+        .filter-tab.active {
+            background: var(--gold-gradient);
+            color: #001A38 !important;
+            font-weight: 800;
+            box-shadow: 0 4px 15px rgba(197, 160, 70, 0.35);
+        }
+
+        .filter-tab.active i {
+            color: #001A38;
+        }
+
+        .badge-count {
+            background: rgba(0, 26, 56, 0.15);
+            font-size: 0.72rem;
+            padding: 2px 7px;
+            border-radius: 50px;
+            font-weight: 800;
+        }
+
+        .filter-tab:not(.active) .badge-count {
+            background: var(--surface-subtle);
+            color: var(--text-muted);
+        }
+
+        /* Search Bar */
+        .search-box-wrap {
+            position: relative;
+            min-width: 280px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 16px 10px 42px;
+            border-radius: 50px;
+            border: 1px solid var(--search-border);
+            font-family: inherit;
+            font-size: 0.85rem;
+            outline: none;
+            transition: var(--transition);
+            background: var(--search-bg);
+            color: var(--search-text);
+        }
+
+        .search-input:focus {
+            border-color: var(--gold-accent);
+            box-shadow: 0 0 0 3px rgba(197, 160, 70, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 0.88rem;
+        }
+
+        /* ==================== YOUTUBE VIDEO GRID ==================== */
+        .section-subhead {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 22px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .subhead-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .subhead-title i {
+            color: #DC2626;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 26px;
+        }
+
+        .video-card {
+            background: var(--surface-card);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+            box-shadow: var(--shadow-subtle);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .video-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-elevated), 0 0 25px rgba(197, 160, 70, 0.15);
+            border-color: var(--card-border-hover);
+        }
+
+        .video-thumb-wrap {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            background: #001A38;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .video-thumb-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .video-card:hover .video-thumb-img {
+            transform: scale(1.06);
+        }
+
+        .video-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: 58px;
+            height: 58px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #DC2626;
+            font-size: 1.3rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+            transition: var(--transition);
+            padding-left: 4px;
+        }
+
+        .video-thumb-wrap:hover .video-play-btn {
+            background: var(--gold-gradient);
+            color: #001A38;
+            transform: translate(-50%, -50%) scale(1.08);
+            box-shadow: 0 8px 25px rgba(197, 160, 70, 0.5);
+        }
+
+        .video-badge-num {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(0, 37, 84, 0.9);
+            color: #FFFFFF;
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .video-badge-tag {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(6px);
+            color: #FFFFFF;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .video-card-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .video-card-title {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: var(--text-title);
+            line-height: 1.45;
+            margin-bottom: 14px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            transition: color 0.2s ease;
+        }
+
+        .video-card:hover .video-card-title {
+            color: var(--gold-accent);
+        }
+
+        .video-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 12px;
+            border-top: 1px solid var(--card-border);
+            gap: 8px;
+        }
+
+        .video-action-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-watch-link {
+            background: var(--surface-subtle);
+            color: var(--text-title);
+            border: 1px solid var(--card-border);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+
+        .btn-watch-link:hover {
+            background: var(--gold-gradient);
+            color: #001A38;
+            border-color: var(--gold-accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(197, 160, 70, 0.3);
+        }
+
+        .btn-yt-direct-card {
+            background: rgba(220, 38, 38, 0.12);
+            color: #EF4444;
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            padding: 6px 10px;
+            border-radius: 50px;
+            font-size: 0.76rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: var(--transition);
+        }
+
+        .btn-yt-direct-card:hover {
+            background: #DC2626;
+            color: #FFFFFF;
+            border-color: #DC2626;
+        }
+
+        /* ==================== PDF MODUL GRID ==================== */
+        .pdf-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 26px;
+        }
+
+        .pdf-card {
+            background: var(--surface-card);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+            box-shadow: var(--shadow-subtle);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .pdf-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-elevated), 0 0 25px rgba(197, 160, 70, 0.15);
+            border-color: var(--card-border-hover);
+        }
+
+        .pdf-thumb-wrap {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            background: var(--bi-navy-dark);
+            overflow: hidden;
+            cursor: pointer;
+            display: block;
+        }
+
+        .pdf-thumb-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .pdf-card:hover .pdf-thumb-img {
+            transform: scale(1.05);
+        }
+
+        .pdf-badge-tag {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(0, 37, 84, 0.9);
+            color: var(--gold-light);
+            border: 1px solid rgba(197, 160, 70, 0.5);
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 50px;
+            backdrop-filter: blur(4px);
+        }
+
+        .pdf-badge-format {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: #DC2626;
+            color: #FFFFFF;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .pdf-card-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .pdf-card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-title);
+            margin-bottom: 8px;
+            line-height: 1.35;
+            transition: color 0.3s ease;
+        }
+
+        .pdf-card-desc {
+            font-size: 0.83rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            line-height: 1.55;
+            flex-grow: 1;
+            transition: color 0.3s ease;
+        }
+
+        .pdf-file-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            padding: 7px 0;
+            border-top: 1px dashed var(--card-border);
+            border-bottom: 1px dashed var(--card-border);
+        }
+
+        .pdf-btn-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .btn-pdf-view {
+            background: var(--surface-subtle);
+            color: var(--text-title);
+            padding: 9px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.82rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: var(--transition);
+            border: 1px solid var(--card-border);
+        }
+
+        .btn-pdf-view:hover {
+            background: #002554;
+            color: #FFFFFF;
+            border-color: #002554;
+            box-shadow: 0 4px 12px rgba(0, 37, 84, 0.3);
+            transform: translateY(-2px);
+        }
+
+        [data-theme="dark"] .btn-pdf-view:hover {
+            background: #1E3A8A;
+            border-color: #3B82F6;
+        }
+
+        .btn-pdf-download {
+            background: transparent;
+            color: var(--gold-accent);
+            padding: 9px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.82rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: var(--transition);
+            border: 1.5px solid var(--gold-accent);
+        }
+
+        .btn-pdf-download:hover {
+            background: var(--gold-gradient);
+            color: #001A38;
+            box-shadow: 0 4px 14px rgba(197, 160, 70, 0.35);
+            transform: translateY(-2px);
+        }
+
+        /* ==================== YOUTUBE POPUP MODAL (CINEMA BLUR) ==================== */
+        .video-modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 10, 24, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.35s ease, visibility 0.35s ease;
+            padding: 20px;
+        }
+
+        .video-modal-backdrop.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .video-modal-dialog {
+            width: 100%;
+            max-width: 940px;
+            background: #001229;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(197, 160, 70, 0.35);
+            transform: scale(0.92) translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .video-modal-backdrop.open .video-modal-dialog {
+            transform: scale(1) translateY(0);
+        }
+
+        .video-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 22px;
+            background: #06152B;
+            border-bottom: 1px solid rgba(197, 160, 70, 0.25);
+            gap: 16px;
+        }
+
+        .video-modal-title {
+            color: #FFFFFF;
+            font-size: 0.96rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .video-modal-title i {
+            color: #DC2626;
+        }
+
+        .modal-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .btn-modal-open-yt {
+            background: #DC2626;
+            color: #FFFFFF;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+
+        .btn-modal-open-yt:hover {
+            background: #B91C1C;
+            transform: translateY(-1px);
+        }
+
+        .modal-close-btn {
+            background: rgba(255, 255, 255, 0.12);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            color: #FFFFFF;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .modal-close-btn:hover {
+            background: var(--gold-gradient);
+            color: #002554;
+            transform: rotate(90deg);
+        }
+
+        .video-iframe-container {
+            position: relative;
+            padding-top: 56.25%;
+            background: #000000;
+        }
+
+        .video-iframe-container iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Local File Warning inside Modal */
+        .modal-local-notice {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.18) 0%, rgba(197, 160, 70, 0.16) 100%);
+            border-bottom: 1px solid rgba(197, 160, 70, 0.35);
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 0.82rem;
+            color: #F1F5F9;
+        }
+
+        .modal-notice-icon {
+            font-size: 1.35rem;
+            color: var(--gold-accent);
+            flex-shrink: 0;
+        }
+
+        .modal-notice-text {
+            flex: 1;
+            line-height: 1.45;
+        }
+
+        .notice-badge {
+            display: inline-block;
+            background: rgba(197, 160, 70, 0.25);
+            color: var(--gold-light);
+            border: 1px solid var(--gold-accent);
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .modal-notice-text p {
+            margin: 0;
+            color: #CBD5E1;
+        }
+
+        .modal-notice-text code {
+            background: rgba(0, 0, 0, 0.45);
+            padding: 1px 6px;
+            border-radius: 4px;
+            color: #F8FAFC;
+            font-family: monospace;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-notice-yt {
+            background: #DC2626;
+            color: #FFFFFF;
+            padding: 7px 14px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.78rem;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+
+        .btn-notice-yt:hover {
+            background: #B91C1C;
+            transform: translateY(-1px);
+            color: #FFFFFF;
+        }
+
+        .video-modal-footer {
+            padding: 10px 20px;
+            background: #000C1D;
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.78rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* ==================== FOOTER (LIGHT & DARK DYNAMIC) ==================== */
+        .site-footer {
+            background: linear-gradient(180deg, #F0F5FC 0%, #E3EEF9 100%);
+            color: #334155;
+            padding: 60px 0 30px;
+            border-top: 3px solid var(--gold-accent);
+            position: relative;
+            z-index: 1;
+            transition: background 0.4s ease, color 0.4s ease;
+        }
+
+        [data-theme="dark"] .site-footer {
+            background: #040A18;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1.3fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand-logo img {
+            height: 48px;
+            background: #FFFFFF;
+            padding: 4px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 37, 84, 0.1);
+        }
+
+        .footer-brand-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--bi-navy-dark);
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .footer-brand-title {
+            color: #FFFFFF;
+        }
+
+        .footer-brand-title span {
+            color: var(--gold-accent);
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-about {
+            font-size: 0.88rem;
+            color: #475569;
+            line-height: 1.7;
+            max-width: 380px;
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .footer-about {
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .footer-heading {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: var(--bi-navy-dark);
+            margin-bottom: 18px;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .footer-heading {
+            color: var(--gold-light);
+        }
+
+        .footer-links-list {
+            list-style: none;
+        }
+
+        .footer-links-list li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links-list a {
+            color: #334155;
+            font-size: 0.88rem;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links-list a i {
+            color: var(--gold-accent);
+            font-size: 0.8rem;
+        }
+
+        .footer-links-list a:hover {
+            color: var(--bi-navy-light);
+            transform: translateX(4px);
+        }
+
+        [data-theme="dark"] .footer-links-list a {
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        [data-theme="dark"] .footer-links-list a:hover {
+            color: var(--gold-light);
+        }
+
+        .footer-territory-text {
+            font-size: 0.88rem;
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 14px;
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .footer-territory-text {
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .footer-cbp-badge {
+            font-size: 0.82rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #FFFFFF;
+            color: var(--bi-navy-dark);
+            border: 1px solid var(--bi-blue-border);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-weight: 700;
+            box-shadow: 0 2px 10px rgba(0, 37, 84, 0.05);
+            transition: var(--transition);
+        }
+
+        .footer-cbp-badge i {
+            color: var(--gold-accent);
+        }
+
+        [data-theme="dark"] .footer-cbp-badge {
+            background: rgba(223, 183, 90, 0.15);
+            color: var(--gold-light);
+            border-color: rgba(223, 183, 90, 0.35);
+            box-shadow: none;
+        }
+
+        .footer-bottom-bar {
+            padding-top: 24px;
+            border-top: 1px solid rgba(0, 59, 122, 0.1);
+            text-align: center;
+            font-size: 0.82rem;
+            color: #64748B;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .footer-bottom-bar {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer-bottom-bar span.gold {
+            color: var(--gold-accent);
+            font-weight: 700;
+        }
+
+        /* ==================== BACK TO TOP ==================== */
+        .btn-scroll-top {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            width: 46px;
+            height: 46px;
+            background: var(--gold-gradient);
+            color: #001A38;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            box-shadow: var(--shadow-gold);
+            cursor: pointer;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            transition: var(--transition);
+            border: 2px solid #FFFFFF;
+        }
+
+        .btn-scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .btn-scroll-top:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(197, 160, 70, 0.6);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 992px) {
+            .carousel-btn-prev {
+                left: 10px;
+            }
+
+            .carousel-btn-next {
+                right: 10px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .brand-desc {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--navbar-bg);
+                flex-direction: column;
+                padding: 24px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+                border-bottom: 2px solid var(--gold-accent);
+                display: none;
+            }
+
+            .nav-menu.open {
+                display: flex;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pdf-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-controls {
+                flex-direction: column;
+                border-radius: var(--radius-lg);
+            }
+
+            .search-box-wrap {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==================== AMBIENT GLOWING MODERN BACKGROUND ==================== -->
+    <div class="ambient-glow-wrapper" aria-hidden="true">
+        <div class="glow-orb glow-orb-1"></div>
+        <div class="glow-orb glow-orb-2"></div>
+        <div class="glow-orb glow-orb-3"></div>
+        <div class="ambient-grid-overlay"></div>
+    </div>
+
+    <!-- ==================== NAVBAR (HEADER) ==================== -->
+    <header class="navbar" id="navbar">
+        <div class="container navbar-inner">
+            <a href="#" class="brand-link">
+                <img src="logo.png" alt="Logo Elang Priatim" class="brand-logo-img">
+                <div class="brand-info">
+                    <span class="brand-name">Elang <span class="gold">Priatim</span></span>
+                    <span class="brand-desc">Ekosistem Literasi Kebanksentralan Priangan Timur</span>
+                </div>
+            </a>
+
+            <div class="nav-right-controls">
+                <!-- Theme Toggle Button -->
+                <button class="theme-toggle-btn" id="themeToggle" aria-label="Ganti Mode Gelap/Terang"
+                    title="Ubah Mode Gelap / Terang">
+                    <span class="theme-icon-circle">
+                        <i class="fas fa-moon" id="themeIcon"></i>
+                    </span>
+                    <span id="themeText">Mode Gelap</span>
+                </button>
+
+                <button class="menu-toggle" id="menuToggle" aria-label="Buka Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#galeri-banner" class="nav-link active">Beranda</a></li>
+                    <li><a href="#materi-edukasi" class="nav-link">Materi Edukasi</a></li>
+                    <li><a href="#materi-edukasi" class="nav-btn"><i class="fas fa-book-open"></i> Akses Materi</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== SECTION CAROUSEL (DIPERCANTIK & 7 BANNER) ==================== -->
+    <section class="carousel-section" id="galeri-banner">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-title-wrap">
+                    <span class="section-subtitle">
+                        <i class="fas fa-images"></i> Informasi & Agenda Utama
+                    </span>
+                    <h2 class="section-title">
+                        Galeri Informasi <span class="gold">Elang Priatim</span>
+                    </h2>
+                    <p class="section-desc">
+                        Ekosistem Literasi Kebanksentralan Priangan Timur — Publikasi dan agenda resmi Bank Indonesia.
+                    </p>
+                    <div class="title-divider"></div>
+                </div>
+            </div>
+
+            <!-- Standalone Carousel Container -->
+            <div class="carousel-card-container" data-aos="zoom-in" data-aos-delay="100">
+                <div class="carousel-outer-frame">
+
+                    <!-- Swiper Carousel Slider -->
+                    <div class="swiper main-carousel">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="corosel1.png" alt="Banner 1"></div>
+                            <div class="swiper-slide"><img src="corosel3.png" alt="Banner 2"></div>
+                            <div class="swiper-slide"><img src="corosel4.png" alt="Banner 3"></div>
+                            <div class="swiper-slide"><img src="corosel5.jpeg" alt="Banner 4"></div>
+                            <div class="swiper-slide"><img src="corosel6.jpeg" alt="Banner 5"></div>
+                            <div class="swiper-slide"><img src="corosel7.jpeg" alt="Banner 6"></div>
+                        </div>
+                    </div>
+
+                    <!-- Outside Nav Buttons -->
+                    <button class="carousel-btn-prev" id="carouselPrev" aria-label="Slide Sebelumnya">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-btn-next" id="carouselNext" aria-label="Slide Selanjutnya">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+
+                </div>
+
+                <!-- Clean Centered Dots -->
+                <div class="carousel-pagination-wrap" id="carouselPagination"></div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION MATERI EDUKASI ==================== -->
+    <section class="materi-section" id="materi-edukasi">
+        <div class="container">
+
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-title-wrap">
+                    <span class="section-subtitle">
+                        <i class="fas fa-book-reader"></i> Pusat Sumber Belajar
+                    </span>
+                    <h2 class="section-title">
+                        Materi <span class="gold">Edukasi</span> Kebanksentralan
+                    </h2>
+                    <p class="section-desc">
+                        Pelajari seluruh materi interaktif melalui video penjelasan resmi Bank Indonesia dan unduh modul
+                        pembelajaran format PDF.
+                    </p>
+                    <div class="title-divider"></div>
+                </div>
+            </div>
+
+            <!-- Filter Controls & Search Bar -->
+            <div class="filter-controls" data-aos="fade-up">
+                <div class="tab-button-group">
+                    <button class="filter-tab active" data-target="all" onclick="filterMateri('all')">
+                        <i class="fas fa-th-large"></i> Semua Materi <span class="badge-count">13</span>
+                    </button>
+                    <button class="filter-tab" data-target="video" onclick="filterMateri('video')">
+                        <i class="fab fa-youtube"></i> Video Edukasi <span class="badge-count">9</span>
+                    </button>
+                    <button class="filter-tab" data-target="pdf" onclick="filterMateri('pdf')">
+                        <i class="fas fa-file-pdf"></i> Modul PDF <span class="badge-count">4</span>
+                    </button>
+                </div>
+
+                <div class="search-box-wrap">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" class="search-input"
+                        placeholder="Cari judul materi (misal: 3D, 5J, SMP)..." onkeyup="searchCards()">
+                </div>
+            </div>
+
+            <!-- ==================== VIDEO SECTION ==================== -->
+            <div id="videoContainerWrap" style="margin-bottom: 50px;">
+                <div class="section-subhead">
+                    <h3 class="subhead-title">
+                        <i class="fab fa-youtube"></i> Video Edukasi Kebanksentralan & Rupiah
+                    </h3>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">
+                        <i class="fas fa-play-circle"></i> Klik untuk memutar / tonton di YouTube
+                    </span>
+                </div>
+
+                <div class="video-grid" id="videoGrid">
+
+                    <!-- Video 1 -->
+                    <div class="video-card" data-category="video"
+                        data-title="cinta-bangga-paham rupiah: dimulai dari kita" data-aos="fade-up" data-aos-delay="0">
+                        <div class="video-thumb-wrap"
+                            onclick="openVideoModal('GzLLbWADnm8', 'Cinta-Bangga-Paham Rupiah: Dimulai dari Kita')">
+                            <img src="https://img.youtube.com/vi/GzLLbWADnm8/hqdefault.jpg" alt="Video 1"
+                                class="video-thumb-img" loading="lazy">
+                            <div class="video-badge-num"><i class="fas fa-hashtag"></i> 01</div>
+                            <div class="video-badge-tag"><i class="fas fa-clock"></i> Video Edukasi</div>
+                            <div class="video-play-btn"><i class="fas fa-play"></i></div>
+                        </div>
+                        <div class="video-card-body">
+                            <h4 class="video-card-title">Cinta-Bangga-Paham Rupiah: Dimulai dari Kita</h4>
+                            <div class="video-card-footer">
+                                <span style="font-size: 0.76rem; color: var(--text-muted);"><i
+                                        class="fab fa-youtube text-danger"></i> Bank Indonesia</span>
+                                <div class="video-action-group">
+                                    <button class="btn-watch-link"
+                                        onclick="openVideoModal('GzLLbWADnm8', 'Cinta-Bangga-Paham Rupiah: Dimulai dari Kita')">
+                                        <i class="fas fa-play"></i> Putar
+                                    </button>
+                                    <a href="https://youtu.be/GzLLbWADnm8?si=gHIxARnlpEOUe9qk" target="_blank"
+                                        class="btn-yt-direct-card" title="Tonton Langsung di YouTube">
+                                        <i class="fab fa-youtube"></i> YouTube
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video 2 -->
+                    <div class="video-card" data-category="video" data-title="perjalanan rupiah sejarah"
+                        data-aos="fade-up" data-aos-delay="50">
+                        <div class="video-thumb-wrap" onclick="openVideoModal('h9geZbRMiHQ', 'Perjalanan Rupiah')">
+                            <img src="https://img.youtube.com/vi/h9geZbRMiHQ/hqdefault.jpg" alt="Video 2"
+                                class="video-thumb-img" loading="lazy">
+                            <div class="video-badge-num"><i class="fas fa-hashtag"></i> 02</div>
+                            <div class="video-badge-tag"><i class="fas fa-clock"></i> Video Edukasi</div>
+                            <div class="video-play-btn"><i class="fas fa-play"></i></div>
+                        </div>
+                        <div class="video-card-body">
+                            <h4 class="video-card-title">Perjalanan Rupiah</h4>
+                            <div class="video-card-footer">
+                                <span style="font-size: 0.76rem; color: var(--text-muted);"><i
+                                        class="fab fa-youtube text-danger"></i> Bank Indonesia</span>
+                                <div class="video-action-group">
+                                    <button class="btn-watch-link"
+                                        onclick="openVideoModal('h9geZbRMiHQ', 'Perjalanan Rupiah')">
+                                        <i class="fas fa-play"></i> Putar
+                                    </button>
+                                    <a href="https://youtu.be/h9geZbRMiHQ?si=2OxsXsSc3JlISBmL" target="_blank"
+                                        class="btn-yt-direct-card" title="Tonton Langsung di YouTube">
+                                        <i class="fab fa-youtube"></i> YouTube
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video 3 -->
+                    <div class="video-card" data-category="video"
+                        data-title="kenali rupiahmu dengan 3d dilihat diraba diterawang" data-aos="fade-up"
+                        data-aos-delay="100">
+                        <div class="video-thumb-wrap"
+                            onclick="openVideoModal('vj0NYsT6d1E', 'Kenali Rupiahmu dengan 3D')">
+                            <img src="https://img.youtube.com/vi/vj0NYsT6d1E/hqdefault.jpg" alt="Video 3"
+                                class="video-thumb-img" loading="lazy">
+                            <div class="video-badge-num"><i class="fas fa-hashtag"></i> 03</div>
+                            <div class="video-badge-tag"><i class="fas fa-shield-alt"></i> Keaslian Uang</div>
+                            <div class="video-play-btn"><i class="fas fa-play"></i></div>
+                        </div>
+                        <div class="video-card-body">
+                            <h4 class="video-card-title">Kenali Rupiahmu dengan 3D</h4>
+                            <div class="video-card-footer">
+                                <span style="font-size: 0.76rem; color: var(--text-muted);"><i
+                                        class="fab fa-youtube text-danger"></i> Bank Indonesia</span>
+                                <div class="video-action-group">
+                                    <button class="btn-watch-link"
+                                        onclick="openVideoModal('vj0NYsT6d1E', 'Kenali Rupiahmu dengan 3D')">
+                                        <i class="fas fa-play"></i> Putar
+                                    </button>
+                                    <a href="https://youtu.be/vj0NYsT6d1E?si=NpLZdz4o_2AlT2Se" target="_blank"
+                                        class="btn-yt-direct-card" title="Tonton Langsung di YouTube">
+                                        <i class="fab fa-youtube"></i> YouTube
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video 4 -->
+                    <div class="video-card" data-category="video"
+                        data-title="rawat rupiahmu dengan 5j jangan dilipat dicoret distapler diremas dibasahi"
+                        data-aos="fade-up" data-aos-delay="150">
+                        <div class="video-thumb-wrap"
+                            onclick="openVideoModal('k4v8hETcBkM', 'Rawat Rupiahmu dengan 5J')">
+                            <img src="https://img.youtube.com/vi/k4v8hETcBkM/hqdefault.jpg" alt="Video 4"
+                                class="video-thumb-img" loading="lazy">
+                            <div class="video-badge-num"><i class="fas fa-hashtag"></i> 04</div>
+                            <div class="video-badge-tag"><i class="fas fa-hand-holding-heart"></i> Perawatan Uang</div>
+                            <div class="video-play-btn"><i class="fas fa-play"></i></div>
+                        </div>
+                        <div class="video-card-body">
+                            <h4 class="video-card-title">Rawat Rupiahmu dengan 5J</h4>
+                            <div class="video-card-footer">
+                                <span style="font-size: 0.76rem; color: var(--text-muted);"><i
+                                        class="fab fa-youtube text-danger"></i> Bank Indonesia</span>
+                                <div class="video-action-group">
+                                    <button class="btn-watch-link"
+                                        onclick="openVideoModal('k4v8hETcBkM', 'Rawat Rupiahmu dengan 5J')">
+                                        <i class="fas fa-play"></i> Putar
+                                    </button>
+                                    <a href="https://youtu.be/k4v8hETcBkM?si=jCtK2j0iLqepmxbN" target="_blank"
+                                        class="btn-yt-direct-card" title="Tonton Langsung di YouTube">
+                                        <i class="fab fa-youtube"></i> YouTube
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video 5 -->
+                    <div class="video-card" data-category="video"
+                        data-title="uang rupiah kertas tahun emisi 2022 te 2022" data-aos="fade-up" data-aos-delay="0">
+                        <div class="video-thumb-wrap"
+                            onclick="openVideoModal('ubW24cPuNlI', 'Uang Rupiah Kertas Tahun Emisi 2022')">
+                            <img src="https://img.youtube.com/vi/ubW24cPuNlI/hqdefault.jpg" alt="Video 5"
+                                class="video-thumb-img" loading="lazy">
+                            <div class="video-badge-num"><i class="fas fa-hashtag"></i> 05</div>
+                            <div class="video-badge-tag"><i class="fas fa-money-bill-wave"></i> Uang Emisi 2022</div>
+                            <div class="video-play-btn"><i class="fas fa-play"></i></div>
+                        </div>
+                        <div class="video-card-body">
+                            <h4 class="video-card-title">Uang Rupiah Kertas Tahun Emisi 2022</h4>
+                            <div class="video-card-footer">
+                                <span style="font-size: 0.76rem; color: var(--text-muted);"><i
+                                        class="fab fa-youtube text-danger"></i> Bank Indonesia</span>
+                                <div class="video-action-group">
+                                    <button class="btn-watch-link"
+                                        onclick="openVideoModal('ubW24cPuNlI', 'Uang Rupiah Kertas Tahun Emisi 2022')">
+                                        <i class="fas fa-play"></i> Putar
+                                    </button>
+                                    <a href="https://youtu.be/ubW24cPuNlI?si=E9VpLzAtae9insuF" target="_blank"
+                                        class="btn-yt-direct-card" title="Tonton Langsung di YouTube">
+                                        <i class="fab fa-youtube"></i> YouTube
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video 6 -->
+                    <div class="video-card" data-category="video"
+                        data-title="ciri-ciri keaslian uang rupiah tahun emisi 2022 te 2022" data-aos="fade-up"
+                        data-aos-delay="50">
+                        <div class="video-thumb-wrap"
+                            onclick="openVideoModal('dl-AKXDdY4Q', 'Ciri-Ciri Keaslian Uang Rupiah Tahun Emisi 2022')">
+                            <img src="https://img.youtube.com/vi/dl-AKXDdY4Q/hqdefault.jpg" alt="Video 6"
+                                class="video-thumb-img" loading="lazy">
+                            <div class="video-badge-num"><i class="fas fa-hashtag"></i> 06</div>
+                            <div class="video-badge-tag"><i class="fas fa-search"></i> Ciri Keaslian</div>
+                            <div class="video-play-btn"><i class="fas fa-play"></i></div>
+                        </div>
+                        <div class="video-card-body">
+                            <h4 class="video-card-title">Ciri-Ciri Keaslian Uang Rupiah Tahun Emisi 2022</h4>
+                            <div class="video-card-footer">
+                                <span style="font-size: 0.76rem; color: var(--text-muted);"><i
+                                        class="fab fa-youtube text-danger"></i> Bank Indonesia</span>
+                                <div class="video-action-group">
+                                    <button class="btn-watch-link"
+                                        onclick="openVideoModal('dl-AKXDdY4Q', 'Ciri-Ciri Keaslian Uang Rupiah Tahun Emisi 2022')">
+                                        <i class="fas fa-play"></i> Putar
+                                    </button>
+                                    <a href="https://youtu.be/dl-AKXDdY4Q?si=20UsUclafdSO-kCR" target="_blank"
+                                        class="btn-yt-direct-card" title="Tonton Langsung di YouTube">
+                                        <i class="fab fa-youtube"></i> YouTube
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video 7 -->
+                    <div class="video-card" data-category="video" data-title="cinta rupiah cbp" data-aos="fade-up"
+                        data-aos-delay="100">
+                        <div class="video-thumb-wrap" onclick="openVideoModal('zUUSeNVSWe0', 'Cinta Rupiah')">
+                            <img src="https://img.youtube.com/vi/zUUSeNVSWe0/hqdefault.jpg" alt="Video 7"
+                                class="video-thumb-img" loading="lazy">
+                            <div class="video-badge-num"><i class="fas fa-hashtag"></i> 07</div>
+                            <div class="video-badge-tag"><i class="fas fa-heart"></i> Cinta Rupiah</div>
+                            <div class="video-play-btn"><i class="fas fa-play"></i></div>
+                        </div>
+                        <div class="video-card-body">
+                            <h4 class="video-card-title">Cinta Rupiah</h4>
+                            <div class="video-card-footer">
+                                <span style="font-size: 0.76rem; color: var(--text-muted);"><i
+                                        class="fab fa-youtube text-danger"></i> Bank Indonesia</span>
+                                <div class="video-action-group">
+                                    <button class="btn-watch-link"
+                                        onclick="openVideoModal('zUUSeNVSWe0', 'Cinta Rupiah')">
+                                        <i class="fas fa-play"></i> Putar
+                                    </button>
+                                    <a href="https://youtu.be/zUUSeNVSWe0?si=nRKklr_ZzN2HNwy9" target="_blank"
+                                        class="btn-yt-direct-card" title="Tonton Langsung di YouTube">
+                                        <i class="fab fa-youtube"></i> YouTube
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video 8 -->
+                    <div class="video-card" data-category="video" data-title="bangga rupiah kedaulatan bangsa cbp"
+                        data-aos="fade-up" data-aos-delay="150">
+                        <div class="video-thumb-wrap" onclick="openVideoModal('ASkS5LsQQSs', 'Bangga Rupiah')">
+                            <img src="https://img.youtube.com/vi/ASkS5LsQQSs/hqdefault.jpg" alt="Video 8"
+                                class="video-thumb-img" loading="lazy">
+                            <div class="video-badge-num"><i class="fas fa-hashtag"></i> 08</div>
+                            <div class="video-badge-tag"><i class="fas fa-flag"></i> Bangga Rupiah</div>
+                            <div class="video-play-btn"><i class="fas fa-play"></i></div>
+                        </div>
+                        <div class="video-card-body">
+                            <h4 class="video-card-title">Bangga Rupiah</h4>
+                            <div class="video-card-footer">
+                                <span style="font-size: 0.76rem; color: var(--text-muted);"><i
+                                        class="fab fa-youtube text-danger"></i> Bank Indonesia</span>
+                                <div class="video-action-group">
+                                    <button class="btn-watch-link"
+                                        onclick="openVideoModal('ASkS5LsQQSs', 'Bangga Rupiah')">
+                                        <i class="fas fa-play"></i> Putar
+                                    </button>
+                                    <a href="https://youtu.be/ASkS5LsQQSs?si=nUIg6aqAXjSbP-nU" target="_blank"
+                                        class="btn-yt-direct-card" title="Tonton Langsung di YouTube">
+                                        <i class="fab fa-youtube"></i> YouTube
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video 9 -->
+                    <div class="video-card" data-category="video"
+                        data-title="paham rupiah fungsi stabilitas ekonomi cbp" data-aos="fade-up" data-aos-delay="0">
+                        <div class="video-thumb-wrap" onclick="openVideoModal('tR5vdJfeFb0', 'Paham Rupiah')">
+                            <img src="https://img.youtube.com/vi/tR5vdJfeFb0/hqdefault.jpg" alt="Video 9"
+                                class="video-thumb-img" loading="lazy">
+                            <div class="video-badge-num"><i class="fas fa-hashtag"></i> 09</div>
+                            <div class="video-badge-tag"><i class="fas fa-lightbulb"></i> Paham Rupiah</div>
+                            <div class="video-play-btn"><i class="fas fa-play"></i></div>
+                        </div>
+                        <div class="video-card-body">
+                            <h4 class="video-card-title">Paham Rupiah</h4>
+                            <div class="video-card-footer">
+                                <span style="font-size: 0.76rem; color: var(--text-muted);"><i
+                                        class="fab fa-youtube text-danger"></i> Bank Indonesia</span>
+                                <div class="video-action-group">
+                                    <button class="btn-watch-link"
+                                        onclick="openVideoModal('tR5vdJfeFb0', 'Paham Rupiah')">
+                                        <i class="fas fa-play"></i> Putar
+                                    </button>
+                                    <a href="https://youtu.be/tR5vdJfeFb0?si=eTnH7FOA0vN4cUcY" target="_blank"
+                                        class="btn-yt-direct-card" title="Tonton Langsung di YouTube">
+                                        <i class="fab fa-youtube"></i> YouTube
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ==================== PDF SECTION ==================== -->
+            <div id="pdfContainerWrap">
+                <div class="section-subhead">
+                    <h3 class="subhead-title">
+                        <i class="fas fa-file-pdf" style="color: #DC2626;"></i> Modul Pembelajaran PDF Resmi
+                    </h3>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">
+                        <i class="fas fa-download"></i> Tersedia baca online & unduh langsung
+                    </span>
+                </div>
+
+                <div class="pdf-grid" id="pdfGrid">
+
+                    <!-- PDF 1 -->
+                    <div class="pdf-card" data-category="pdf"
+                        data-title="cbp rupiah untuk smp modul pembelajaran cinta bangga paham rupiah"
+                        data-aos="fade-up" data-aos-delay="0">
+                        <a href="CBP Rupiah untuk SMP.pdf" target="_blank" class="pdf-thumb-wrap">
+                            <img src="thumb_cbp_smp.png" alt="Banner CBP Rupiah untuk SMP" class="pdf-thumb-img">
+                            <span class="pdf-badge-tag"><i class="fas fa-user-graduate"></i> Tingkat SMP</span>
+                            <span class="pdf-badge-format"><i class="fas fa-file-pdf"></i> PDF</span>
+                        </a>
+                        <div class="pdf-card-body">
+                            <h4 class="pdf-card-title">CBP Rupiah untuk SMP</h4>
+                            <p class="pdf-card-desc">Panduan komprehensif penanaman nilai Cinta, Bangga, dan Paham
+                                Rupiah untuk siswa sekolah menengah pertama.</p>
+                            <div class="pdf-file-info">
+                                <span><i class="fas fa-file-alt"></i> Format PDF</span>
+                                <span>•</span>
+                                <span><i class="fas fa-hdd"></i> 4.4 MB</span>
+                            </div>
+                            <div class="pdf-btn-actions">
+                                <a href="CBP Rupiah untuk SMP.pdf" target="_blank" class="btn-pdf-view">
+                                    <i class="fas fa-eye"></i> Lihat Materi
+                                </a>
+                                <a href="CBP Rupiah untuk SMP.pdf" download="CBP_Rupiah_untuk_SMP.pdf"
+                                    class="btn-pdf-download">
+                                    <i class="fas fa-download"></i> Unduh
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PDF 2 -->
+                    <div class="pdf-card" data-category="pdf"
+                        data-title="kebangsentralan tingkat smp sma bank sentral indonesia" data-aos="fade-up"
+                        data-aos-delay="100">
+                        <a href="Kebangsentralan Tingkat SMP SMA.pdf" target="_blank" class="pdf-thumb-wrap">
+                            <img src="thumb_kebangsentralan_smp_sma.png" alt="Banner Kebangsentralan Tingkat SMP SMA"
+                                class="pdf-thumb-img">
+                            <span class="pdf-badge-tag"><i class="fas fa-school"></i> Tingkat SMP & SMA</span>
+                            <span class="pdf-badge-format"><i class="fas fa-file-pdf"></i> PDF</span>
+                        </a>
+                        <div class="pdf-card-body">
+                            <h4 class="pdf-card-title">Kebangsentralan Tingkat SMP SMA</h4>
+                            <p class="pdf-card-desc">Bahan ajar pengenalan peran, wewenang, dan fungsi Bank Indonesia
+                                dalam menjaga stabilitas moneter negara.</p>
+                            <div class="pdf-file-info">
+                                <span><i class="fas fa-file-alt"></i> Format PDF</span>
+                                <span>•</span>
+                                <span><i class="fas fa-hdd"></i> 6.5 MB</span>
+                            </div>
+                            <div class="pdf-btn-actions">
+                                <a href="Kebangsentralan Tingkat SMP SMA.pdf" target="_blank" class="btn-pdf-view">
+                                    <i class="fas fa-eye"></i> Lihat Materi
+                                </a>
+                                <a href="Kebangsentralan Tingkat SMP SMA.pdf" download="Kebangsentralan_SMP_SMA.pdf"
+                                    class="btn-pdf-download">
+                                    <i class="fas fa-download"></i> Unduh
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PDF 3 -->
+                    <div class="pdf-card" data-category="pdf"
+                        data-title="kebangsentralan untuk perguruan tinggi mahasiswa ekonomi makro" data-aos="fade-up"
+                        data-aos-delay="200">
+                        <a href="Kebangsentralan Untuk Perguruan Tinggi.pdf" target="_blank" class="pdf-thumb-wrap">
+                            <img src="thumb_kebangsentralan_pt.png" alt="Banner Kebangsentralan Perguruan Tinggi"
+                                class="pdf-thumb-img">
+                            <span class="pdf-badge-tag"><i class="fas fa-graduation-cap"></i> Perguruan Tinggi</span>
+                            <span class="pdf-badge-format"><i class="fas fa-file-pdf"></i> PDF</span>
+                        </a>
+                        <div class="pdf-card-body">
+                            <h4 class="pdf-card-title">Kebangsentralan Perguruan Tinggi</h4>
+                            <p class="pdf-card-desc">Kajian mendalam kebijakan moneter, makroprudensial, sistem
+                                pembayaran, dan digitalisasi perbankan sentral.</p>
+                            <div class="pdf-file-info">
+                                <span><i class="fas fa-file-alt"></i> Format PDF</span>
+                                <span>•</span>
+                                <span><i class="fas fa-hdd"></i> 4.2 MB</span>
+                            </div>
+                            <div class="pdf-btn-actions">
+                                <a href="Kebangsentralan Untuk Perguruan Tinggi.pdf" target="_blank"
+                                    class="btn-pdf-view">
+                                    <i class="fas fa-eye"></i> Lihat Materi
+                                </a>
+                                <a href="Kebangsentralan Untuk Perguruan Tinggi.pdf"
+                                    download="Kebangsentralan_Perguruan_Tinggi.pdf" class="btn-pdf-download">
+                                    <i class="fas fa-download"></i> Unduh
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PDF 4 -->
+                    <div class="pdf-card" data-category="pdf"
+                        data-title="kelembagaan bank sentral struktur tugas wewenang bi" data-aos="fade-up"
+                        data-aos-delay="300">
+                        <a href="Kelembagaan Bank Sentral.pdf" target="_blank" class="pdf-thumb-wrap">
+                            <img src="thumb_kelembagaan_bi.png" alt="Banner Kelembagaan Bank Sentral"
+                                class="pdf-thumb-img">
+                            <span class="pdf-badge-tag"><i class="fas fa-landmark"></i> Tata Kelola & Umum</span>
+                            <span class="pdf-badge-format"><i class="fas fa-file-pdf"></i> PDF</span>
+                        </a>
+                        <div class="pdf-card-body">
+                            <h4 class="pdf-card-title">Kelembagaan Bank Sentral</h4>
+                            <p class="pdf-card-desc">Pembahasan komprehensif sejarah kelembagaan, landasan hukum UU,
+                                serta independensi Bank Indonesia.</p>
+                            <div class="pdf-file-info">
+                                <span><i class="fas fa-file-alt"></i> Format PDF</span>
+                                <span>•</span>
+                                <span><i class="fas fa-hdd"></i> 9.5 MB</span>
+                            </div>
+                            <div class="pdf-btn-actions">
+                                <a href="Kelembagaan Bank Sentral.pdf" target="_blank" class="btn-pdf-view">
+                                    <i class="fas fa-eye"></i> Lihat Materi
+                                </a>
+                                <a href="Kelembagaan Bank Sentral.pdf" download="Kelembagaan_Bank_Sentral.pdf"
+                                    class="btn-pdf-download">
+                                    <i class="fas fa-download"></i> Unduh
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Empty Search Result Fallback -->
+            <div id="noResults" style="display: none; text-align: center; padding: 50px 20px;">
+                <i class="fas fa-search"
+                    style="font-size: 3rem; color: var(--text-muted); margin-bottom: 14px; opacity: 0.5;"></i>
+                <h4 style="color: var(--text-heading); font-weight: 700;">Materi Tidak Ditemukan</h4>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Coba cari dengan kata kunci lain seperti
+                    "Rupiah", "3D", "5J", "SMP", atau "Emisi 2022".</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+
+                <div>
+                    <div class="footer-brand-logo">
+                        <img src="logo.png" alt="Logo Elang Priatim">
+                        <span class="footer-brand-title">Elang <span>Priatim</span></span>
+                    </div>
+                    <p class="footer-about">
+                        <strong>Ekosistem Literasi Kebanksentralan Priangan Timur</strong> merupakan platform edukasi
+                        terpadu Bank Indonesia untuk meningkatkan literasi kebanksentralan dan kecintaan terhadap mata
+                        uang Rupiah.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Navigasi Halaman</h4>
+                    <ul class="footer-links-list">
+                        <li><a href="#galeri-banner"><i class="fas fa-angle-right"></i> Beranda / Informasi Utama</a>
+                        </li>
+                        <li><a href="#materi-edukasi"><i class="fas fa-angle-right"></i> Video Edukasi</a></li>
+                        <li><a href="#materi-edukasi"><i class="fas fa-angle-right"></i> Modul PDF</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Wilayah Kerja Bank Indonesia Kantor Perwakilan Tasikmalaya</h4>
+                    <p class="footer-territory-text">
+                        Melayani Wilayah Priangan Timur:<br>
+                        <strong>Kota Tasikmalaya</strong>, <strong>Kab. Tasikmalaya</strong>, <strong>Kab.
+                            Ciamis</strong>, <strong>Kota Banjar</strong>, dan <strong>Kab. Pangandaran</strong>.
+                    </p>
+                    <div class="footer-cbp-badge">
+                        <i class="fas fa-shield-alt"></i> Cinta, Bangga, Paham Rupiah
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom-bar">
+                <p>&copy; 2026 <span class="gold">Elang Priatim</span> — Ekosistem Literasi Kebanksentralan Priangan
+                    Timur. Dilindungi Hak Cipta.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== CINEMA POPUP MODAL YOUTUBE ==================== -->
+    <div class="video-modal-backdrop" id="videoModalBackdrop">
+        <div class="video-modal-dialog">
+            <div class="video-modal-header">
+                <div class="video-modal-title">
+                    <i class="fab fa-youtube"></i>
+                    <span id="modalVideoTitleText">Memuat Video...</span>
+                </div>
+                <div class="modal-header-actions">
+                    <a id="modalOpenExternalBtn" href="#" target="_blank" class="btn-modal-open-yt">
+                        <i class="fab fa-youtube"></i> Tonton di YouTube
+                    </a>
+                    <button class="modal-close-btn" onclick="closeVideoModal()" aria-label="Tutup Video">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Banner info jika membuka file secara lokal (file://) -->
+            <div class="modal-local-notice" id="modalLocalNotice" style="display: none;">
+                <div class="modal-notice-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="modal-notice-text">
+                    <span class="notice-badge">Mode File Lokal (file://)</span>
+                    <p>
+                        Jika YouTube menampilkan <strong>Error 153</strong>, jalankan file
+                        <code>jalankan_website.bat</code> agar video dapat diputar langsung di popup tanpa error, atau
+                        tonton langsung:
+                    </p>
+                </div>
+                <a id="modalNoticeBtn" href="#" target="_blank" class="btn-notice-yt">
+                    <i class="fab fa-youtube"></i> Tonton di YouTube
+                </a>
+            </div>
+
+            <div class="video-iframe-container">
+                <iframe id="videoPlayerIframe" src="" title="Pemutar Video Edukasi Elang Priatim" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <div class="video-modal-footer" id="modalFooterNotice">
+                <span><i class="fas fa-shield-alt text-warning"></i> Bank Indonesia — Ekosistem Literasi Kebanksentralan
+                    Priangan Timur</span>
+                <span style="font-size: 0.74rem; opacity: 0.8;">Tekan <strong>ESC</strong> atau klik di luar untuk
+                    menutup</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back To Top Button -->
+    <button class="btn-scroll-top" id="btnScrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+        aria-label="Kembali ke atas">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        // Init AOS Animations
+        AOS.init({
+            duration: 700,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 60
+        });
+
+        // Initialize Main Swiper Carousel (3-Slide Showcase: Center, Right, Left Clean Presentation)
+        const mainCarousel = new Swiper('.main-carousel', {
+            loop: true,
+            loopAdditionalSlides: 5,
+            speed: 600,
+            centeredSlides: true,
+            slideToClickedSlide: true,
+            autoplay: {
+                delay: 4500,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true
+            },
+            slidesPerView: 1.2,
+            spaceBetween: 16,
+            breakpoints: {
+                640: {
+                    slidesPerView: 1.5,
+                    spaceBetween: 20,
+                },
+                992: {
+                    slidesPerView: 1.85,
+                    spaceBetween: 24,
+                },
+                1200: {
+                    slidesPerView: 1.95,
+                    spaceBetween: 28,
+                }
+            },
+            pagination: {
+                el: '#carouselPagination',
+                clickable: true,
+                renderBullet: function (index, className) {
+                    // Hanya render 6 bullet untuk 6 gambar asli
+                    if (index < 6) {
+                        return `<span class="${className}" data-index="${index}"></span>`;
+                    }
+                    return '';
+                }
+            },
+            navigation: {
+                nextEl: '#carouselNext',
+                prevEl: '#carouselPrev',
+            },
+            on: {
+                init: function () {
+                    this.update();
+                },
+                slideChange: function () {
+                    const real = this.realIndex % 6;
+                    const bullets = document.querySelectorAll('#carouselPagination .swiper-pagination-bullet');
+                    bullets.forEach((b, i) => {
+                        if (i === real) {
+                            b.classList.add('swiper-pagination-bullet-active');
+                        } else {
+                            b.classList.remove('swiper-pagination-bullet-active');
+                        }
+                    });
+                }
+            }
+        });
+
+        // Click on bullet to slide
+        const paginationWrap = document.getElementById('carouselPagination');
+        if (paginationWrap) {
+            paginationWrap.addEventListener('click', (e) => {
+                const bullet = e.target.closest('.swiper-pagination-bullet');
+                if (bullet && bullet.dataset.index !== undefined) {
+                    const targetIdx = parseInt(bullet.dataset.index, 10);
+                    mainCarousel.slideToLoop(targetIdx);
+                }
+            });
+        }
+
+        // ==================== THEME TOGGLE (DARK / LIGHT MODE) ====================
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        const htmlElement = document.documentElement;
+
+        // Load saved theme or system preference
+        const savedTheme = localStorage.getItem('elang_theme');
+        const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const initialTheme = savedTheme ? savedTheme : (systemPrefersDark ? 'dark' : 'light');
+
+        applyTheme(initialTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(targetTheme);
+            localStorage.setItem('elang_theme', targetTheme);
+        });
+
+        function applyTheme(theme) {
+            htmlElement.setAttribute('data-theme', theme);
+            if (theme === 'dark') {
+                themeIcon.className = 'fas fa-sun';
+                themeText.textContent = 'Mode Terang';
+                themeToggle.setAttribute('title', 'Ganti ke Mode Terang');
+            } else {
+                themeIcon.className = 'fas fa-moon';
+                themeText.textContent = 'Mode Gelap';
+                themeToggle.setAttribute('title', 'Ganti ke Mode Gelap');
+            }
+        }
+
+        // Mobile Nav Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        if (menuToggle && navMenu) {
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('open');
+            });
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('open');
+                });
+            });
+        }
+
+        // Back to top & Scroll behavior
+        const btnScrollTop = document.getElementById('btnScrollTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                btnScrollTop.classList.add('show');
+            } else {
+                btnScrollTop.classList.remove('show');
+            }
+        });
+
+        // ==================== YOUTUBE POPUP MODAL ====================
+        const modalBackdrop = document.getElementById('videoModalBackdrop');
+        const playerIframe = document.getElementById('videoPlayerIframe');
+        const modalVideoTitleText = document.getElementById('modalVideoTitleText');
+        const modalOpenExternalBtn = document.getElementById('modalOpenExternalBtn');
+        const modalNoticeBtn = document.getElementById('modalNoticeBtn');
+        const modalLocalNotice = document.getElementById('modalLocalNotice');
+
+        function openVideoModal(videoId, title) {
+            modalVideoTitleText.textContent = title;
+            const ytWatchUrl = `https://www.youtube.com/watch?v=${videoId}`;
+            if (modalOpenExternalBtn) modalOpenExternalBtn.href = ytWatchUrl;
+            if (modalNoticeBtn) modalNoticeBtn.href = ytWatchUrl;
+
+            // Deteksi apakah sedang dibuka via file:// (lokal) atau http:// (server)
+            const isLocal = window.location.protocol === 'file:';
+            if (modalLocalNotice) {
+                modalLocalNotice.style.display = isLocal ? 'flex' : 'none';
+            }
+
+            // Sertakan origin jika bukan null
+            const originParam = (!isLocal && window.location.origin && window.location.origin !== 'null')
+                ? `&origin=${encodeURIComponent(window.location.origin)}`
+                : '';
+
+            // Gunakan domain resmi www.youtube.com dengan parameter optimal
+            playerIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&enablejsapi=1&playsinline=1${originParam}`;
+            modalBackdrop.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideoModal() {
+            modalBackdrop.classList.remove('open');
+            document.body.style.overflow = '';
+            setTimeout(() => {
+                playerIframe.src = '';
+            }, 250);
+        }
+
+        // Close on backdrop click
+        modalBackdrop.addEventListener('click', (e) => {
+            if (e.target === modalBackdrop) {
+                closeVideoModal();
+            }
+        });
+
+        // Close on ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalBackdrop.classList.contains('open')) {
+                closeVideoModal();
+            }
+        });
+
+        // ==================== FILTER MATERI (ALL / VIDEO / PDF) ====================
+        function filterMateri(type) {
+            document.querySelectorAll('.filter-tab').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.target === type);
+            });
+
+            const videoWrap = document.getElementById('videoContainerWrap');
+            const pdfWrap = document.getElementById('pdfContainerWrap');
+
+            if (type === 'all') {
+                videoWrap.style.display = 'block';
+                pdfWrap.style.display = 'block';
+            } else if (type === 'video') {
+                videoWrap.style.display = 'block';
+                pdfWrap.style.display = 'none';
+            } else if (type === 'pdf') {
+                videoWrap.style.display = 'none';
+                pdfWrap.style.display = 'block';
+            }
+
+            searchCards();
+            AOS.refresh();
+        }
+
+        // ==================== REAL-TIME SEARCH ====================
+        function searchCards() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.video-card, .pdf-card');
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const title = card.getAttribute('data-title') || '';
+                const matches = title.includes(query);
+
+                const isVideo = card.getAttribute('data-category') === 'video';
+                const videoWrapVisible = document.getElementById('videoContainerWrap').style.display !== 'none';
+                const pdfWrapVisible = document.getElementById('pdfContainerWrap').style.display !== 'none';
+
+                let shouldShow = matches;
+                if (isVideo && !videoWrapVisible) shouldShow = false;
+                if (!isVideo && !pdfWrapVisible) shouldShow = false;
+
+                if (shouldShow) {
+                    card.style.display = '';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            const noResults = document.getElementById('noResults');
+            if (visibleCount === 0) {
+                noResults.style.display = 'block';
+            } else {
+                noResults.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>
