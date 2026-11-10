@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Referrer policy handled by server headers -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>Elang Priatim - Ekosistem Literasi Kebanksentralan Priangan Timur</title>
 
     <!-- Google Fonts -->
@@ -503,7 +503,7 @@
 
         /* ==================== 3-SLIDE CAROUSEL (CLEAN, ELEGANT, SEAMLESS LOOP) ==================== */
         .carousel-card-container {
-            max-width: 1120px;
+            max-width: 1180px;
             margin: 0 auto;
             position: relative;
             padding: 0 20px;
@@ -517,7 +517,7 @@
 
         .main-carousel {
             width: 100%;
-            padding: 20px 0 32px;
+            padding: 24px 0 36px;
             overflow: hidden;
             position: relative;
         }
@@ -525,9 +525,11 @@
         .main-carousel .swiper-wrapper {
             display: flex;
             align-items: center;
+            box-sizing: content-box;
         }
 
         .main-carousel .swiper-slide {
+            flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -540,29 +542,43 @@
             box-shadow: 0 4px 18px rgba(0, 37, 84, 0.06);
             position: relative;
             cursor: pointer;
-            /* Slide samping: sedikit pudar dan blur lembut */
-            opacity: 0.42;
-            transform: scale(0.86);
-            filter: blur(2.5px);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: transform, filter, opacity;
+            /* Fading alami bertingkat (opacity & blur halus, tanpa potongan kasar) */
+            opacity: 0.32;
+            transform: scale(0.84);
+            filter: blur(3px);
+            transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+                opacity 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+                filter 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+                border-color 0.45s ease,
+                box-shadow 0.45s ease;
+            will-change: transform, opacity, filter;
+        }
+
+        /* Slide samping kiri & kanan: lebih jelas daripada luar tapi tetap pudar elegan */
+        .main-carousel .swiper-slide-prev,
+        .main-carousel .swiper-slide-next {
+            opacity: 0.58;
+            transform: scale(0.90);
+            filter: blur(1.8px);
+            z-index: 5;
+            border-color: var(--card-border);
         }
 
         .main-carousel .swiper-slide:not(.swiper-slide-active):hover {
-            opacity: 0.75;
-            filter: blur(1px);
-            transform: scale(0.89);
-            border-color: rgba(197, 160, 70, 0.45);
+            opacity: 0.82;
+            filter: blur(0.6px);
+            transform: scale(0.92);
+            border-color: rgba(197, 160, 70, 0.5);
         }
 
         /* Slide Tengah Aktif: 100% Jelas, Tajam, Membesar, Berbingkai Emas BI */
         .main-carousel .swiper-slide-active {
             opacity: 1 !important;
-            transform: scale(1.02) !important;
+            transform: scale(1.03) !important;
             filter: blur(0px) !important;
             z-index: 10;
             border: 2.5px solid var(--gold-accent) !important;
-            box-shadow: 0 16px 40px rgba(0, 37, 84, 0.16), 0 0 28px rgba(197, 160, 70, 0.25) !important;
+            box-shadow: 0 16px 40px rgba(0, 37, 84, 0.16), 0 0 28px rgba(197, 160, 70, 0.28) !important;
         }
 
         [data-theme="dark"] .main-carousel .swiper-slide-active {
@@ -577,6 +593,8 @@
             background: var(--surface-card);
             border-radius: calc(var(--radius-xl) - 6px);
             display: block;
+            user-select: none;
+            -webkit-user-drag: none;
             transition: transform 0.4s ease;
         }
 
@@ -1276,68 +1294,149 @@
             border: none;
         }
 
-        /* Local File Warning inside Modal */
-        .modal-local-notice {
-            background: linear-gradient(135deg, rgba(220, 38, 38, 0.18) 0%, rgba(197, 160, 70, 0.16) 100%);
-            border-bottom: 1px solid rgba(197, 160, 70, 0.35);
-            padding: 10px 18px;
+        /* Local File Theater Stage inside Modal (Tanpa Error 153) */
+        .video-local-stage {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #020914;
             display: flex;
             align-items: center;
-            gap: 14px;
-            font-size: 0.82rem;
-            color: #F1F5F9;
+            justify-content: center;
+            overflow: hidden;
         }
 
-        .modal-notice-icon {
-            font-size: 1.35rem;
-            color: var(--gold-accent);
-            flex-shrink: 0;
+        .local-stage-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.35) blur(4px);
+            transform: scale(1.06);
+            transition: transform 0.6s ease;
         }
 
-        .modal-notice-text {
-            flex: 1;
-            line-height: 1.45;
+        .local-stage-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(0, 37, 84, 0.45) 0%, rgba(1, 9, 20, 0.94) 85%);
         }
 
-        .notice-badge {
-            display: inline-block;
-            background: rgba(197, 160, 70, 0.25);
-            color: var(--gold-light);
-            border: 1px solid var(--gold-accent);
-            padding: 2px 7px;
-            border-radius: 4px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            margin-bottom: 3px;
-        }
-
-        .modal-notice-text p {
-            margin: 0;
-            color: #CBD5E1;
-        }
-
-        .modal-notice-text code {
-            background: rgba(0, 0, 0, 0.45);
-            padding: 1px 6px;
-            border-radius: 4px;
-            color: #F8FAFC;
-            font-family: monospace;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .btn-notice-yt {
-            background: #DC2626;
+        .local-stage-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 24px;
+            max-width: 620px;
             color: #FFFFFF;
-            padding: 7px 14px;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 0.78rem;
-            white-space: nowrap;
+        }
+
+        .local-stage-badge {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #F8FAFC;
+            margin-bottom: 12px;
+        }
+
+        .local-stage-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 10px;
+            line-height: 1.35;
+        }
+
+        .local-stage-desc {
+            font-size: 0.86rem;
+            color: #CBD5E1;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .local-stage-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .btn-play-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--gold-gradient);
+            color: #002554 !important;
+            font-weight: 700;
+            font-size: 0.92rem;
+            padding: 11px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 8px 24px rgba(197, 160, 70, 0.4);
             transition: var(--transition);
-            flex-shrink: 0;
+        }
+
+        .btn-play-primary:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 12px 30px rgba(197, 160, 70, 0.55);
+            color: #001A3D !important;
+        }
+
+        .btn-play-try-embed {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #FFFFFF;
+            font-weight: 600;
+            font-size: 0.84rem;
+            padding: 10px 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            backdrop-filter: blur(6px);
+            transition: var(--transition);
+        }
+
+        .btn-play-try-embed:hover {
+            background: rgba(255, 255, 255, 0.22);
+            border-color: #FFFFFF;
+            transform: translateY(-2px);
+        }
+
+        .local-stage-tip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(197, 160, 70, 0.12);
+            border: 1px solid rgba(197, 160, 70, 0.28);
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 0.78rem;
+            color: #F1F5F9;
+            text-align: left;
+            line-height: 1.4;
+        }
+
+        .local-stage-tip code {
+            background: rgba(0, 0, 0, 0.45);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--gold-accent-light);
+            font-weight: 700;
+        }
+
+        flex-shrink: 0;
         }
 
         .btn-notice-yt:hover {
@@ -1748,13 +1847,13 @@
             <div class="filter-controls" data-aos="fade-up">
                 <div class="tab-button-group">
                     <button class="filter-tab active" data-target="all" onclick="filterMateri('all')">
-                        <i class="fas fa-th-large"></i> Semua Materi <span class="badge-count">13</span>
+                        <i class="fas fa-th-large"></i> Semua Materi <span class="badge-count">14</span>
                     </button>
                     <button class="filter-tab" data-target="video" onclick="filterMateri('video')">
                         <i class="fab fa-youtube"></i> Video Edukasi <span class="badge-count">9</span>
                     </button>
                     <button class="filter-tab" data-target="pdf" onclick="filterMateri('pdf')">
-                        <i class="fas fa-file-pdf"></i> Modul PDF <span class="badge-count">4</span>
+                        <i class="fas fa-file-pdf"></i> Modul PDF <span class="badge-count">5</span>
                     </button>
                 </div>
 
@@ -2065,8 +2164,40 @@
 
                     <!-- PDF 1 -->
                     <div class="pdf-card" data-category="pdf"
-                        data-title="cbp rupiah untuk smp modul pembelajaran cinta bangga paham rupiah"
+                        data-title="kebanksentralan tk sd mengenal rupiah modul edukasi anak usia dini cbp"
                         data-aos="fade-up" data-aos-delay="0">
+                        <a href="Kebanksentralan_TK_SD_Mengenal_Rupiah.pdf" target="_blank" class="pdf-thumb-wrap">
+                            <img src="thumb_kebanksentralan_tk_sd.png" alt="Banner Mengenal Rupiah Tingkat TK & SD"
+                                class="pdf-thumb-img">
+                            <span class="pdf-badge-tag"><i class="fas fa-child"></i> Tingkat TK & SD</span>
+                            <span class="pdf-badge-format"><i class="fas fa-file-pdf"></i> PDF</span>
+                        </a>
+                        <div class="pdf-card-body">
+                            <h4 class="pdf-card-title">Mengenal Rupiah: Tingkat TK & SD</h4>
+                            <p class="pdf-card-desc">Modul edukasi interaktif dan menyenangkan untuk mengenalkan mata
+                                uang Rupiah serta peran bank sentral bagi anak usia dini dan sekolah dasar.</p>
+                            <div class="pdf-file-info">
+                                <span><i class="fas fa-file-alt"></i> Format PDF</span>
+                                <span>•</span>
+                                <span><i class="fas fa-hdd"></i> 2.4 MB</span>
+                            </div>
+                            <div class="pdf-btn-actions">
+                                <a href="Kebanksentralan_TK_SD_Mengenal_Rupiah.pdf" target="_blank"
+                                    class="btn-pdf-view">
+                                    <i class="fas fa-eye"></i> Lihat Materi
+                                </a>
+                                <a href="Kebanksentralan_TK_SD_Mengenal_Rupiah.pdf"
+                                    download="Kebanksentralan_TK_SD_Mengenal_Rupiah.pdf" class="btn-pdf-download">
+                                    <i class="fas fa-download"></i> Unduh
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PDF 2 -->
+                    <div class="pdf-card" data-category="pdf"
+                        data-title="cbp rupiah untuk smp modul pembelajaran cinta bangga paham rupiah"
+                        data-aos="fade-up" data-aos-delay="80">
                         <a href="CBP Rupiah untuk SMP.pdf" target="_blank" class="pdf-thumb-wrap">
                             <img src="thumb_cbp_smp.png" alt="Banner CBP Rupiah untuk SMP" class="pdf-thumb-img">
                             <span class="pdf-badge-tag"><i class="fas fa-user-graduate"></i> Tingkat SMP</span>
@@ -2093,10 +2224,10 @@
                         </div>
                     </div>
 
-                    <!-- PDF 2 -->
+                    <!-- PDF 3 -->
                     <div class="pdf-card" data-category="pdf"
                         data-title="kebangsentralan tingkat smp sma bank sentral indonesia" data-aos="fade-up"
-                        data-aos-delay="100">
+                        data-aos-delay="160">
                         <a href="Kebangsentralan Tingkat SMP SMA.pdf" target="_blank" class="pdf-thumb-wrap">
                             <img src="thumb_kebangsentralan_smp_sma.png" alt="Banner Kebangsentralan Tingkat SMP SMA"
                                 class="pdf-thumb-img">
@@ -2124,10 +2255,10 @@
                         </div>
                     </div>
 
-                    <!-- PDF 3 -->
+                    <!-- PDF 4 -->
                     <div class="pdf-card" data-category="pdf"
                         data-title="kebangsentralan untuk perguruan tinggi mahasiswa ekonomi makro" data-aos="fade-up"
-                        data-aos-delay="200">
+                        data-aos-delay="240">
                         <a href="Kebangsentralan Untuk Perguruan Tinggi.pdf" target="_blank" class="pdf-thumb-wrap">
                             <img src="thumb_kebangsentralan_pt.png" alt="Banner Kebangsentralan Perguruan Tinggi"
                                 class="pdf-thumb-img">
@@ -2156,10 +2287,10 @@
                         </div>
                     </div>
 
-                    <!-- PDF 4 -->
+                    <!-- PDF 5 -->
                     <div class="pdf-card" data-category="pdf"
                         data-title="kelembagaan bank sentral struktur tugas wewenang bi" data-aos="fade-up"
-                        data-aos-delay="300">
+                        data-aos-delay="320">
                         <a href="Kelembagaan Bank Sentral.pdf" target="_blank" class="pdf-thumb-wrap">
                             <img src="thumb_kelembagaan_bi.png" alt="Banner Kelembagaan Bank Sentral"
                                 class="pdf-thumb-img">
@@ -2268,28 +2399,40 @@
                 </div>
             </div>
 
-            <!-- Banner info jika membuka file secara lokal (file://) -->
-            <div class="modal-local-notice" id="modalLocalNotice" style="display: none;">
-                <div class="modal-notice-icon">
-                    <i class="fas fa-exclamation-triangle"></i>
-                </div>
-                <div class="modal-notice-text">
-                    <span class="notice-badge">Mode File Lokal (file://)</span>
-                    <p>
-                        Jika YouTube menampilkan <strong>Error 153</strong>, jalankan file
-                        <code>jalankan_website.bat</code> agar video dapat diputar langsung di popup tanpa error, atau
-                        tonton langsung:
+            <!-- Stage Khusus Mode File Lokal (file://) - Tampilan Elegan Bebas Error 153 -->
+            <div class="video-local-stage" id="videoLocalStage" style="display: none;">
+                <div class="local-stage-bg" id="localStageBg"></div>
+                <div class="local-stage-overlay"></div>
+                <div class="local-stage-content">
+                    <div class="local-stage-badge">
+                        <i class="fab fa-youtube" style="color: #EF4444;"></i> Video Edukasi Bank Indonesia
+                    </div>
+                    <h3 class="local-stage-title" id="localStageTitle">Judul Video</h3>
+                    <p class="local-stage-desc">
+                        Video edukasi resmi kebanksentralan siap diputar dalam resolusi tinggi.
                     </p>
+                    <div class="local-stage-actions">
+                        <a id="localStageWatchBtn" href="#" target="_blank" class="btn-play-primary">
+                            <i class="fas fa-play-circle"></i> Putar Video di YouTube
+                        </a>
+                        <button class="btn-play-try-embed" onclick="forcePlayEmbed()"
+                            title="Coba putar di dalam jendela popup">
+                            <i class="fas fa-desktop"></i> Putar di Sini (Embed)
+                        </button>
+                    </div>
+                    <div class="local-stage-tip">
+                        <i class="fas fa-lightbulb" style="color: #F59E0B;"></i>
+                        <span><strong>Info:</strong> Untuk memutar langsung di dalam popup tanpa tab baru, jalankan file
+                            <code>jalankan_website.bat</code> di folder website ini.</span>
+                    </div>
                 </div>
-                <a id="modalNoticeBtn" href="#" target="_blank" class="btn-notice-yt">
-                    <i class="fab fa-youtube"></i> Tonton di YouTube
-                </a>
             </div>
 
-            <div class="video-iframe-container">
+            <!-- Wadah Iframe Video Player (Aktif di http://localhost dan online) -->
+            <div class="video-iframe-container" id="videoIframeContainer">
                 <iframe id="videoPlayerIframe" src="" title="Pemutar Video Edukasi Elang Priatim" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen></iframe>
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
             <div class="video-modal-footer" id="modalFooterNotice">
                 <span><i class="fas fa-shield-alt text-warning"></i> Bank Indonesia — Ekosistem Literasi Kebanksentralan
@@ -2322,30 +2465,33 @@
         // Initialize Main Swiper Carousel
         const mainCarousel = new Swiper('.main-carousel', {
             loop: true,
-            loopAdditionalSlides: 2,
-            speed: 600,
+            loopAdditionalSlides: 6,
+            loopAddBlankSlides: false,
+            observer: true,
+            observeParents: true,
+            resizeObserver: true,
+            speed: 650,
             grabCursor: true,
             centeredSlides: true,
-            slideToClickedSlide: true,
             watchSlidesProgress: true,
             autoplay: {
                 delay: 4500,
                 disableOnInteraction: false,
                 pauseOnMouseEnter: true
             },
-            slidesPerView: 1.2,
+            slidesPerView: 1.25,
             spaceBetween: 16,
             breakpoints: {
                 640: {
-                    slidesPerView: 1.5,
+                    slidesPerView: 1.6,
                     spaceBetween: 20,
                 },
                 992: {
-                    slidesPerView: 1.85,
+                    slidesPerView: 2.05,
                     spaceBetween: 24,
                 },
                 1200: {
-                    slidesPerView: 1.95,
+                    slidesPerView: 2.2,
                     spaceBetween: 28,
                 }
             },
@@ -2356,6 +2502,24 @@
             navigation: {
                 nextEl: '#carouselNext',
                 prevEl: '#carouselPrev',
+            }
+        });
+
+        // Pastikan seluruh slide di kanan & kiri ter-render sempurna saat halaman dibuka
+        window.addEventListener('load', () => {
+            if (mainCarousel && mainCarousel.update) {
+                mainCarousel.update();
+            }
+        });
+
+        // Navigasi aman saat slide samping diklik (mencegah loop loncat)
+        mainCarousel.on('click', (swiper) => {
+            if (swiper.clickedSlide && !swiper.clickedSlide.classList.contains('swiper-slide-active')) {
+                if (swiper.clickedIndex > swiper.activeIndex) {
+                    swiper.slideNext();
+                } else if (swiper.clickedIndex < swiper.activeIndex) {
+                    swiper.slidePrev();
+                }
             }
         });
 
@@ -2421,38 +2585,73 @@
         const playerIframe = document.getElementById('videoPlayerIframe');
         const modalVideoTitleText = document.getElementById('modalVideoTitleText');
         const modalOpenExternalBtn = document.getElementById('modalOpenExternalBtn');
-        const modalNoticeBtn = document.getElementById('modalNoticeBtn');
-        const modalLocalNotice = document.getElementById('modalLocalNotice');
 
-        // Deteksi sekali saja apakah berjalan via file:// atau http://
+        // Deteksi apakah berjalan via file:// atau http://
         const IS_LOCAL_FILE = (window.location.protocol === 'file:');
 
+        // Otomatis beralih ke server lokal jika sudah aktif di background
+        if (IS_LOCAL_FILE) {
+            fetch('http://localhost:8080/index.html', { mode: 'no-cors' })
+                .then(() => {
+                    console.log('Server lokal terdeteksi aktif, mengalihkan ke http://localhost:8080/index.html...');
+                    window.location.href = 'http://localhost:8080/index.html';
+                })
+                .catch(() => {
+                    // Server belum aktif, tetap pada file://
+                });
+        }
+
+        let currentActiveVideoId = '';
+
         function openVideoModal(videoId, title) {
+            currentActiveVideoId = videoId;
             const ytWatchUrl = 'https://www.youtube.com/watch?v=' + videoId;
+            const thumbUrl = 'https://img.youtube.com/vi/' + videoId + '/hqdefault.jpg';
 
-            // Jika dibuka via file://, LANGSUNG buka YouTube di tab baru
-            // (iframe embed TIDAK BISA bekerja pada protokol file:// karena kebijakan keamanan YouTube)
-            if (IS_LOCAL_FILE) {
-                window.open(ytWatchUrl, '_blank');
-                return;
-            }
-
-            // Mode http:// / https:// — buka popup modal dengan iframe embed
             modalVideoTitleText.textContent = title;
             if (modalOpenExternalBtn) modalOpenExternalBtn.href = ytWatchUrl;
-            if (modalNoticeBtn) modalNoticeBtn.href = ytWatchUrl;
-            if (modalLocalNotice) modalLocalNotice.style.display = 'none';
 
-            // Embed YouTube via iframe (hanya berfungsi di http:// / https://)
-            playerIframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1';
+            const localStage = document.getElementById('videoLocalStage');
+            const iframeContainer = document.getElementById('videoIframeContainer');
+            const localStageBg = document.getElementById('localStageBg');
+            const localStageTitle = document.getElementById('localStageTitle');
+            const localStageWatchBtn = document.getElementById('localStageWatchBtn');
+
+            if (IS_LOCAL_FILE) {
+                // Tampilan Stage Elegan untuk Mode Lokal (Menghindari Error 153 dari YouTube)
+                if (localStageBg) localStageBg.style.backgroundImage = 'url(' + thumbUrl + ')';
+                if (localStageTitle) localStageTitle.textContent = title;
+                if (localStageWatchBtn) localStageWatchBtn.href = ytWatchUrl;
+
+                if (localStage) localStage.style.display = 'flex';
+                if (iframeContainer) iframeContainer.style.display = 'none';
+                playerIframe.src = '';
+            } else {
+                // Mode Server Lokal (http://localhost:8080) atau Online
+                // Video langsung diputar di popup tanpa Error 153
+                if (localStage) localStage.style.display = 'none';
+                if (iframeContainer) iframeContainer.style.display = 'block';
+                playerIframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1';
+            }
+
             modalBackdrop.classList.add('open');
             document.body.style.overflow = 'hidden';
+        }
+
+        function forcePlayEmbed() {
+            if (!currentActiveVideoId) return;
+            const localStage = document.getElementById('videoLocalStage');
+            const iframeContainer = document.getElementById('videoIframeContainer');
+
+            if (localStage) localStage.style.display = 'none';
+            if (iframeContainer) iframeContainer.style.display = 'block';
+            playerIframe.src = 'https://www.youtube.com/embed/' + currentActiveVideoId + '?autoplay=1&rel=0&modestbranding=1';
         }
 
         function closeVideoModal() {
             modalBackdrop.classList.remove('open');
             document.body.style.overflow = '';
-            setTimeout(function() {
+            setTimeout(function () {
                 playerIframe.src = '';
             }, 250);
         }
