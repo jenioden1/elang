@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <!-- Referrer policy handled by server headers -->
     <title>Elang Priatim - Ekosistem Literasi Kebanksentralan Priangan Timur</title>
 
     <!-- Google Fonts -->
@@ -2289,7 +2289,7 @@
             <div class="video-iframe-container">
                 <iframe id="videoPlayerIframe" src="" title="Pemutar Video Edukasi Elang Priatim" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    allowfullscreen></iframe>
             </div>
             <div class="video-modal-footer" id="modalFooterNotice">
                 <span><i class="fas fa-shield-alt text-warning"></i> Bank Indonesia — Ekosistem Literasi Kebanksentralan
@@ -2319,13 +2319,15 @@
             offset: 60
         });
 
-        // Initialize Main Swiper Carousel (3-Slide Showcase: Center, Right, Left Clean Presentation)
+        // Initialize Main Swiper Carousel
         const mainCarousel = new Swiper('.main-carousel', {
             loop: true,
-            loopAdditionalSlides: 5,
+            loopAdditionalSlides: 2,
             speed: 600,
+            grabCursor: true,
             centeredSlides: true,
             slideToClickedSlide: true,
+            watchSlidesProgress: true,
             autoplay: {
                 delay: 4500,
                 disableOnInteraction: false,
@@ -2350,47 +2352,12 @@
             pagination: {
                 el: '#carouselPagination',
                 clickable: true,
-                renderBullet: function (index, className) {
-                    // Hanya render 6 bullet untuk 6 gambar asli
-                    if (index < 6) {
-                        return `<span class="${className}" data-index="${index}"></span>`;
-                    }
-                    return '';
-                }
             },
             navigation: {
                 nextEl: '#carouselNext',
                 prevEl: '#carouselPrev',
-            },
-            on: {
-                init: function () {
-                    this.update();
-                },
-                slideChange: function () {
-                    const real = this.realIndex % 6;
-                    const bullets = document.querySelectorAll('#carouselPagination .swiper-pagination-bullet');
-                    bullets.forEach((b, i) => {
-                        if (i === real) {
-                            b.classList.add('swiper-pagination-bullet-active');
-                        } else {
-                            b.classList.remove('swiper-pagination-bullet-active');
-                        }
-                    });
-                }
             }
         });
-
-        // Click on bullet to slide
-        const paginationWrap = document.getElementById('carouselPagination');
-        if (paginationWrap) {
-            paginationWrap.addEventListener('click', (e) => {
-                const bullet = e.target.closest('.swiper-pagination-bullet');
-                if (bullet && bullet.dataset.index !== undefined) {
-                    const targetIdx = parseInt(bullet.dataset.index, 10);
-                    mainCarousel.slideToLoop(targetIdx);
-                }
-            });
-        }
 
         // ==================== THEME TOGGLE (DARK / LIGHT MODE) ====================
         const themeToggle = document.getElementById('themeToggle');
@@ -2457,25 +2424,27 @@
         const modalNoticeBtn = document.getElementById('modalNoticeBtn');
         const modalLocalNotice = document.getElementById('modalLocalNotice');
 
-        function openVideoModal(videoId, title) {
-            modalVideoTitleText.textContent = title;
-            const ytWatchUrl = `https://www.youtube.com/watch?v=${videoId}`;
-            if (modalOpenExternalBtn) modalOpenExternalBtn.href = ytWatchUrl;
-            if (modalNoticeBtn) modalNoticeBtn.href = ytWatchUrl;
+        // Deteksi sekali saja apakah berjalan via file:// atau http://
+        const IS_LOCAL_FILE = (window.location.protocol === 'file:');
 
-            // Deteksi apakah sedang dibuka via file:// (lokal) atau http:// (server)
-            const isLocal = window.location.protocol === 'file:';
-            if (modalLocalNotice) {
-                modalLocalNotice.style.display = isLocal ? 'flex' : 'none';
+        function openVideoModal(videoId, title) {
+            const ytWatchUrl = 'https://www.youtube.com/watch?v=' + videoId;
+
+            // Jika dibuka via file://, LANGSUNG buka YouTube di tab baru
+            // (iframe embed TIDAK BISA bekerja pada protokol file:// karena kebijakan keamanan YouTube)
+            if (IS_LOCAL_FILE) {
+                window.open(ytWatchUrl, '_blank');
+                return;
             }
 
-            // Sertakan origin jika bukan null
-            const originParam = (!isLocal && window.location.origin && window.location.origin !== 'null')
-                ? `&origin=${encodeURIComponent(window.location.origin)}`
-                : '';
+            // Mode http:// / https:// — buka popup modal dengan iframe embed
+            modalVideoTitleText.textContent = title;
+            if (modalOpenExternalBtn) modalOpenExternalBtn.href = ytWatchUrl;
+            if (modalNoticeBtn) modalNoticeBtn.href = ytWatchUrl;
+            if (modalLocalNotice) modalLocalNotice.style.display = 'none';
 
-            // Gunakan domain resmi www.youtube.com dengan parameter optimal
-            playerIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&enablejsapi=1&playsinline=1${originParam}`;
+            // Embed YouTube via iframe (hanya berfungsi di http:// / https://)
+            playerIframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1';
             modalBackdrop.classList.add('open');
             document.body.style.overflow = 'hidden';
         }
@@ -2483,7 +2452,7 @@
         function closeVideoModal() {
             modalBackdrop.classList.remove('open');
             document.body.style.overflow = '';
-            setTimeout(() => {
+            setTimeout(function() {
                 playerIframe.src = '';
             }, 250);
         }
