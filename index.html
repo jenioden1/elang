@@ -598,6 +598,87 @@
             transition: transform 0.4s ease;
         }
 
+        /* Interactive Floating Slide Badges */
+        .slide-badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: rgba(0, 37, 84, 0.88);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #FFFFFF;
+            font-size: 0.74rem;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 50px;
+            border: 1px solid rgba(197, 160, 70, 0.6);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 5;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+            opacity: 0;
+            transform: translateY(-8px);
+            transition: all 0.4s ease;
+            pointer-events: none;
+        }
+
+        .main-carousel .swiper-slide-active .slide-badge {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Shine Effect Animation on Active Slide */
+        .main-carousel .swiper-slide::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 40%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.22) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(25deg);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .main-carousel .swiper-slide-active::after {
+            opacity: 1;
+            animation: slideShineSweep 5s infinite;
+        }
+
+        @keyframes slideShineSweep {
+            0% { transform: translateX(-150%) rotate(25deg); }
+            20% { transform: translateX(350%) rotate(25deg); }
+            100% { transform: translateX(350%) rotate(25deg); }
+        }
+
+        /* Interactive Autoplay Progress Bar */
+        .carousel-progress-track {
+            width: 100%;
+            max-width: 260px;
+            height: 3px;
+            background: rgba(100, 116, 139, 0.2);
+            border-radius: 10px;
+            margin: 16px auto 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--gold-gradient);
+            border-radius: 10px;
+            transition: width 0.1s linear;
+        }
+
         /* Nav Buttons */
         .carousel-btn-prev,
         .carousel-btn-next {
@@ -1436,15 +1517,6 @@
             font-weight: 700;
         }
 
-        flex-shrink: 0;
-        }
-
-        .btn-notice-yt:hover {
-            background: #B91C1C;
-            transform: translateY(-1px);
-            color: #FFFFFF;
-        }
-
         .video-modal-footer {
             padding: 10px 20px;
             background: #000C1D;
@@ -1454,6 +1526,633 @@
             align-items: center;
             justify-content: space-between;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* ==================== DASHBOARD SECTION ==================== */
+        .dashboard-section {
+            padding: 70px 0 90px;
+            position: relative;
+            z-index: 1;
+            background: var(--bg-section-alt);
+            border-top: 1px solid var(--card-border);
+            border-bottom: 1px solid var(--card-border);
+            transition: background 0.4s ease;
+        }
+
+        .dashboard-kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        .kpi-card {
+            background: var(--surface-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--card-border);
+            padding: 24px 28px;
+            box-shadow: var(--shadow-card);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-elevated);
+        }
+
+        .kpi-card.kpi-l1 {
+            border-top: 4px solid var(--gold-accent);
+        }
+
+        .kpi-card.kpi-l2 {
+            border-top: 4px solid var(--bi-navy-light);
+        }
+
+        .kpi-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .kpi-label {
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: var(--text-heading);
+            letter-spacing: 0.5px;
+        }
+
+        .kpi-icon-pill {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--surface-subtle);
+            border: 1px solid var(--card-border);
+            font-size: 0.95rem;
+        }
+
+        .kpi-body {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .kpi-value {
+            font-size: 3.2rem;
+            font-weight: 800;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-heading);
+            line-height: 1;
+        }
+
+        .kpi-emoji {
+            font-size: 2rem;
+            line-height: 1;
+        }
+
+        .kpi-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            padding-top: 10px;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .kpi-badge-pct {
+            font-weight: 700;
+            color: #059669;
+            background: rgba(16, 185, 129, 0.12);
+            padding: 3px 10px;
+            border-radius: 50px;
+            font-size: 0.76rem;
+        }
+
+        /* 2-Column Content Grid */
+        .dashboard-content-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 26px;
+        }
+
+        .dashboard-card {
+            background: var(--surface-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--card-border);
+            padding: 26px;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition);
+        }
+
+        .dashboard-card:hover {
+            box-shadow: var(--shadow-elevated);
+        }
+
+        .dashboard-card-header {
+            margin-bottom: 18px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .dashboard-card-title {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0;
+        }
+
+        .chart-subtitle {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        /* ===== NATIVE INTERACTIVE DUAL-AXIS CHART ===== */
+        .custom-dual-chart {
+            display: flex;
+            align-items: stretch;
+            gap: 12px;
+            width: 100%;
+            height: 310px;
+            position: relative;
+            padding-top: 24px;
+            padding-bottom: 34px;
+            user-select: none;
+        }
+
+        .chart-y-axis-left,
+        .chart-y-axis-right {
+            display: flex;
+            align-items: stretch;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .chart-y-axis-left {
+            gap: 6px;
+        }
+
+        .chart-y-axis-right {
+            gap: 6px;
+        }
+
+        .axis-title {
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+        }
+
+        .axis-title-l1 {
+            color: #D97706;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+        }
+
+        .axis-title-l2 {
+            color: #002554;
+            writing-mode: vertical-rl;
+        }
+
+        [data-theme="dark"] .axis-title-l2 {
+            color: #60A5FA;
+        }
+
+        .y-ticks {
+            position: relative;
+            width: 28px;
+            height: 100%;
+        }
+
+        .y-ticks span {
+            position: absolute;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            transform: translateY(50%);
+            line-height: 1;
+        }
+
+        .y-ticks-l1 span {
+            right: 4px;
+        }
+
+        .y-ticks-l2 span {
+            left: 4px;
+        }
+
+        .chart-main-area {
+            flex: 1;
+            position: relative;
+            height: 100%;
+        }
+
+        .chart-grid-layer {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .grid-line-item {
+            position: absolute;
+            left: 0;
+            right: 0;
+            border-top: 1px dashed var(--card-border);
+            opacity: 0.75;
+        }
+
+        .grid-line-item.baseline {
+            border-top: 2px solid var(--card-border);
+            opacity: 1;
+        }
+
+        .chart-columns-layer {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: stretch;
+            z-index: 2;
+        }
+
+        .chart-col-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            flex: 1;
+            max-width: 110px;
+            padding: 0 4px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .bars-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .c-bar {
+            width: 24px;
+            border-radius: 6px 6px 0 0;
+            position: relative;
+            transition: height 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s ease, filter 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .c-bar.bar-l1 {
+            background: linear-gradient(180deg, #F59E0B 0%, #D97706 100%);
+            box-shadow: 0 3px 10px rgba(217, 119, 6, 0.25);
+        }
+
+        .c-bar.bar-l2 {
+            background: linear-gradient(180deg, #0A58CA 0%, #002554 100%);
+            box-shadow: 0 3px 10px rgba(0, 37, 84, 0.25);
+        }
+
+        [data-theme="dark"] .c-bar.bar-l2 {
+            background: linear-gradient(180deg, #60A5FA 0%, #2563EB 100%);
+            box-shadow: 0 3px 10px rgba(59, 130, 246, 0.3);
+        }
+
+        .chart-col-group:hover .c-bar {
+            transform: translateY(-4px);
+            filter: brightness(1.1);
+        }
+
+        .chart-col-group:hover .c-bar.bar-l1 {
+            box-shadow: 0 8px 18px rgba(217, 119, 6, 0.4);
+        }
+
+        .chart-col-group:hover .c-bar.bar-l2 {
+            box-shadow: 0 8px 18px rgba(0, 37, 84, 0.4);
+        }
+
+        [data-theme="dark"] .chart-col-group:hover .c-bar.bar-l2 {
+            box-shadow: 0 8px 18px rgba(59, 130, 246, 0.5);
+        }
+
+        .bar-val-badge {
+            position: absolute;
+            top: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 2px 5px;
+            border-radius: 4px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .bar-l1 .bar-val-badge {
+            background: #FEF3C7;
+            color: #92400E;
+            border: 1px solid rgba(217, 119, 6, 0.3);
+        }
+
+        .bar-l2 .bar-val-badge {
+            background: #DBEAFE;
+            color: #1E40AF;
+            border: 1px solid rgba(30, 64, 175, 0.3);
+        }
+
+        [data-theme="dark"] .bar-l1 .bar-val-badge {
+            background: #78350F;
+            color: #FDE68A;
+            border-color: rgba(253, 230, 138, 0.3);
+        }
+
+        [data-theme="dark"] .bar-l2 .bar-val-badge {
+            background: #1E3A8A;
+            color: #BFDBFE;
+            border-color: rgba(191, 219, 254, 0.3);
+        }
+
+        .chart-col-group:hover .bar-val-badge {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-2px);
+        }
+
+        .col-caption {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 8px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--text-title);
+            text-align: center;
+            line-height: 1.25;
+            white-space: normal;
+            width: 100%;
+            transition: color 0.2s ease;
+        }
+
+        .chart-col-group:hover .col-caption {
+            color: var(--bi-gold);
+        }
+
+        /* Floating popover */
+        .chart-popover {
+            position: absolute;
+            bottom: 105%;
+            left: 50%;
+            transform: translateX(-50%) translateY(6px);
+            background: var(--surface-card);
+            border: 1px solid var(--bi-gold);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 10px 14px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+            z-index: 20;
+        }
+
+        .chart-col-group:hover .chart-popover {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .popover-title {
+            font-size: 0.76rem;
+            font-weight: 800;
+            color: var(--text-title);
+            margin-bottom: 6px;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 4px;
+        }
+
+        .popover-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.72rem;
+            gap: 12px;
+            margin-bottom: 3px;
+        }
+
+        .popover-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .popover-label {
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .popover-value {
+            font-weight: 800;
+        }
+
+        .val-l1 {
+            color: #D97706;
+        }
+
+        .val-l2 {
+            color: #002554;
+        }
+
+        [data-theme="dark"] .val-l2 {
+            color: #60A5FA;
+        }
+
+        @media (max-width: 640px) {
+            .custom-dual-chart {
+                height: 270px;
+                gap: 4px;
+                padding-bottom: 36px;
+            }
+            .c-bar {
+                width: 14px;
+            }
+            .bars-container {
+                gap: 4px;
+            }
+            .col-caption {
+                font-size: 0.65rem;
+            }
+            .y-ticks {
+                width: 20px;
+            }
+            .axis-title {
+                font-size: 0.6rem;
+            }
+        }
+
+        .chart-legend-custom {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 18px;
+            padding-top: 12px;
+            border-top: 1px solid var(--card-border);
+            font-size: 0.82rem;
+            color: var(--text-body);
+            font-weight: 600;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-color-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+        }
+
+        .dot-l1 {
+            background: #EAB308;
+        }
+
+        .dot-l2 {
+            background: #002554;
+        }
+
+        [data-theme="dark"] .dot-l2 {
+            background: #3B82F6;
+        }
+
+        /* Table styling */
+        .dashboard-table-wrap {
+            overflow-x: auto;
+            width: 100%;
+        }
+
+        .dashboard-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .dashboard-table th {
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            padding: 12px 14px;
+            border-bottom: 2px solid var(--card-border);
+            text-align: left;
+            background: var(--surface-subtle);
+        }
+
+        .dashboard-table td {
+            padding: 14px 14px;
+            border-bottom: 1px solid var(--card-border);
+            font-size: 0.88rem;
+            color: var(--text-title);
+            vertical-align: middle;
+            transition: background 0.2s ease;
+        }
+
+        .dashboard-table tbody tr:hover td {
+            background: var(--surface-subtle);
+        }
+
+        .dashboard-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .activity-name {
+            font-weight: 700;
+            color: var(--text-title);
+            font-size: 0.92rem;
+            margin-bottom: 2px;
+        }
+
+        .activity-tag {
+            font-size: 0.74rem;
+            color: var(--text-muted);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .badge-score {
+            display: inline-block;
+            font-weight: 700;
+            font-size: 0.88rem;
+            padding: 6px 14px;
+            border-radius: var(--radius-sm);
+            letter-spacing: 0.2px;
+            white-space: nowrap;
+        }
+
+        .badge-l1 {
+            background: rgba(234, 179, 8, 0.14);
+            color: #B45309;
+            border: 1px solid rgba(234, 179, 8, 0.35);
+        }
+
+        [data-theme="dark"] .badge-l1 {
+            background: rgba(234, 179, 8, 0.2);
+            color: #FDE047;
+            border-color: rgba(234, 179, 8, 0.4);
+        }
+
+        .badge-l2 {
+            background: rgba(10, 88, 202, 0.12);
+            color: #003B7A;
+            border: 1px solid rgba(10, 88, 202, 0.3);
+        }
+
+        [data-theme="dark"] .badge-l2 {
+            background: rgba(59, 130, 246, 0.2);
+            color: #93C5FD;
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+
+        .dashboard-table tfoot td {
+            background: var(--surface-subtle);
+            font-weight: 700;
+            border-top: 2px solid var(--card-border);
+            border-bottom: none;
+            padding: 14px 14px;
+        }
+
+        @media (max-width: 992px) {
+            .dashboard-kpi-grid {
+                grid-template-columns: 1fr;
+            }
+            .dashboard-content-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* ==================== FOOTER (LIGHT & DARK DYNAMIC) ==================== */
@@ -1766,6 +2465,7 @@
                 <ul class="nav-menu" id="navMenu">
                     <li><a href="#galeri-banner" class="nav-link active">Beranda</a></li>
                     <li><a href="#materi-edukasi" class="nav-link">Materi Edukasi</a></li>
+                    <li><a href="#dashboard-kinerja" class="nav-link">Dashboard Kinerja</a></li>
                     <li><a href="#materi-edukasi" class="nav-btn"><i class="fas fa-book-open"></i> Akses Materi</a></li>
                 </ul>
             </div>
@@ -1790,19 +2490,63 @@
                 </div>
             </div>
 
-            <!-- Standalone Carousel Container -->
-            <div class="carousel-card-container" data-aos="zoom-in" data-aos-delay="100">
+            <!-- Standalone Carousel Container (Bebas shrink glitch) -->
+            <div class="carousel-card-container">
                 <div class="carousel-outer-frame">
 
-                    <!-- Swiper Carousel Slider -->
+                    <!-- Swiper Carousel Slider (12 Slides untuk Loop Sempurna Tanpa Sisi Kosong) -->
                     <div class="swiper main-carousel">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide"><img src="corosel1.png" alt="Banner 1"></div>
-                            <div class="swiper-slide"><img src="corosel3.png" alt="Banner 2"></div>
-                            <div class="swiper-slide"><img src="corosel4.png" alt="Banner 3"></div>
-                            <div class="swiper-slide"><img src="corosel5.jpeg" alt="Banner 4"></div>
-                            <div class="swiper-slide"><img src="corosel6.jpeg" alt="Banner 5"></div>
-                            <div class="swiper-slide"><img src="corosel7.jpeg" alt="Banner 6"></div>
+                            <!-- Set 1 -->
+                            <div class="swiper-slide">
+                                <img src="corosel1.png" alt="Banner 1">
+                                <span class="slide-badge"><i class="fas fa-coins text-gold"></i> CBP Rupiah 2026</span>
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="corosel3.png" alt="Banner 2">
+                                <span class="slide-badge"><i class="fas fa-shield-alt text-danger"></i> Waspada Hoaks BI</span>
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="corosel4.png" alt="Banner 3">
+                                <span class="slide-badge"><i class="fas fa-graduation-cap text-gold"></i> Tingkat Mahasiswa</span>
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="corosel5.jpeg" alt="Banner 4">
+                                <span class="slide-badge"><i class="fas fa-university text-blue"></i> Kebangsentralan</span>
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="corosel6.jpeg" alt="Banner 5">
+                                <span class="slide-badge"><i class="fas fa-landmark text-gold"></i> Kantor Perwakilan BI</span>
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="corosel7.jpeg" alt="Banner 6">
+                                <span class="slide-badge"><i class="fas fa-award text-gold"></i> Agenda Prioritas</span>
+                            </div>
+                            <!-- Set 2 (Duplikasi Loop Tanpa Celah) -->
+                            <div class="swiper-slide">
+                                <img src="corosel1.png" alt="Banner 1">
+                                <span class="slide-badge"><i class="fas fa-coins text-gold"></i> CBP Rupiah 2026</span>
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="corosel3.png" alt="Banner 2">
+                                <span class="slide-badge"><i class="fas fa-shield-alt text-danger"></i> Waspada Hoaks BI</span>
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="corosel4.png" alt="Banner 3">
+                                <span class="slide-badge"><i class="fas fa-graduation-cap text-gold"></i> Tingkat Mahasiswa</span>
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="corosel5.jpeg" alt="Banner 4">
+                                <span class="slide-badge"><i class="fas fa-university text-blue"></i> Kebangsentralan</span>
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="corosel6.jpeg" alt="Banner 5">
+                                <span class="slide-badge"><i class="fas fa-landmark text-gold"></i> Kantor Perwakilan BI</span>
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="corosel7.jpeg" alt="Banner 6">
+                                <span class="slide-badge"><i class="fas fa-award text-gold"></i> Agenda Prioritas</span>
+                            </div>
                         </div>
                     </div>
 
@@ -1816,7 +2560,12 @@
 
                 </div>
 
-                <!-- Clean Centered Dots -->
+                <!-- Interactive Autoplay Progress Bar -->
+                <div class="carousel-progress-track">
+                    <div class="carousel-progress-bar" id="carouselProgressBar"></div>
+                </div>
+
+                <!-- Clean Centered Dots (6 Dots) -->
                 <div class="carousel-pagination-wrap" id="carouselPagination"></div>
 
             </div>
@@ -2333,6 +3082,319 @@
         </div>
     </section>
 
+    <!-- ==================== DASHBOARD SECTION ==================== -->
+    <section class="dashboard-section" id="dashboard-kinerja">
+        <div class="container">
+
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-title-wrap">
+                    <span class="section-subtitle">
+                        <i class="fas fa-chart-line"></i> EVALUASI & CAPAIAN PROGRAM
+                    </span>
+                    <h2 class="section-title">
+                        Dashboard Kinerja <span class="gold">Literasi Edukasi</span>
+                    </h2>
+                    <div class="title-underline"></div>
+                </div>
+                <p class="section-desc">
+                    Hasil pengukuran Level 1 (Kepuasan Peserta) dan Level 2 (Peningkatan Pemahaman/Post-Test) pada rangkaian agenda kebanksentralan Bank Indonesia Kantor Perwakilan Tasikmalaya.
+                </p>
+            </div>
+
+            <!-- Top 2 KPI Metric Cards -->
+            <div class="dashboard-kpi-grid" data-aos="fade-up" data-aos-delay="100">
+                <div class="kpi-card kpi-l1">
+                    <div class="kpi-header">
+                        <span class="kpi-label">RATA-RATA L1 (KEPUASAN)</span>
+                        <span class="kpi-icon-pill"><i class="fas fa-star" style="color: #EAB308;"></i></span>
+                    </div>
+                    <div class="kpi-body">
+                        <span class="kpi-value">5.85</span>
+                        <span class="kpi-emoji">⭐</span>
+                    </div>
+                    <div class="kpi-footer">
+                        <span>Skala Maksimal: <strong>6.00</strong></span>
+                        <span class="kpi-badge-pct">Sangat Puas (97.5%)</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card kpi-l2">
+                    <div class="kpi-header">
+                        <span class="kpi-label">RATA-RATA L2 (POST-TEST)</span>
+                        <span class="kpi-icon-pill"><i class="fas fa-bullseye" style="color: #0A58CA;"></i></span>
+                    </div>
+                    <div class="kpi-body">
+                        <span class="kpi-value">95.02</span>
+                        <span class="kpi-emoji">🎯</span>
+                    </div>
+                    <div class="kpi-footer">
+                        <span>Skala Maksimal: <strong>100</strong></span>
+                        <span class="kpi-badge-pct">Pemahaman Istimewa</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom 2-Column: Chart & Table -->
+            <div class="dashboard-content-grid" data-aos="fade-up" data-aos-delay="200">
+
+                <!-- Left Column: Grafik Perbandingan Kinerja -->
+                <div class="dashboard-card chart-card">
+                    <div class="dashboard-card-header">
+                        <h4 class="dashboard-card-title">
+                            <i class="fas fa-chart-bar" style="color: #C5A046;"></i> Grafik Perbandingan Kinerja
+                        </h4>
+                        <span class="chart-subtitle">Dual-Axis: L1 (Kepuasan) & L2 (Pemahaman)</span>
+                    </div>
+                    <div class="custom-dual-chart" id="customPerformanceChart">
+                        <!-- Left Y Axis: Skor L1 (0 - 6) -->
+                        <div class="chart-y-axis-left">
+                            <span class="axis-title axis-title-l1">Skor L1 (1-6)</span>
+                            <div class="y-ticks y-ticks-l1">
+                                <span style="bottom: 100%;">6</span>
+                                <span style="bottom: 83.33%;">5</span>
+                                <span style="bottom: 66.67%;">4</span>
+                                <span style="bottom: 50%;">3</span>
+                                <span style="bottom: 33.33%;">2</span>
+                                <span style="bottom: 16.67%;">1</span>
+                                <span style="bottom: 0%;">0</span>
+                            </div>
+                        </div>
+
+                        <!-- Main Plot Area with Grid Lines & Column Bars -->
+                        <div class="chart-main-area">
+                            <!-- Background Grid Lines -->
+                            <div class="chart-grid-layer">
+                                <div class="grid-line-item" style="bottom: 100%;"></div>
+                                <div class="grid-line-item" style="bottom: 83.33%;"></div>
+                                <div class="grid-line-item" style="bottom: 66.67%;"></div>
+                                <div class="grid-line-item" style="bottom: 50%;"></div>
+                                <div class="grid-line-item" style="bottom: 33.33%;"></div>
+                                <div class="grid-line-item" style="bottom: 16.67%;"></div>
+                                <div class="grid-line-item baseline" style="bottom: 0%;"></div>
+                            </div>
+
+                            <!-- 4 Column Bar Groups -->
+                            <div class="chart-columns-layer">
+                                <!-- Col 1: Kunjungan Literasi FEB Unsil -->
+                                <div class="chart-col-group">
+                                    <div class="bars-container">
+                                        <div class="c-bar bar-l1" data-height="97.5%" style="height: 97.5%;">
+                                            <span class="bar-val-badge">5.85</span>
+                                        </div>
+                                        <div class="c-bar bar-l2" data-height="93.78%" style="height: 93.78%;">
+                                            <span class="bar-val-badge">93.8</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-caption">Kunjungan FEB Unsil</div>
+
+                                    <!-- Hover Popover -->
+                                    <div class="chart-popover">
+                                        <div class="popover-title">Kunjungan Literasi FEB Unsil</div>
+                                        <div class="popover-row">
+                                            <span class="popover-label">⭐ L1 (Kepuasan):</span>
+                                            <span class="popover-value val-l1">5.85 / 6.00</span>
+                                        </div>
+                                        <div class="popover-row">
+                                            <span class="popover-label">🎯 L2 (Pemahaman):</span>
+                                            <span class="popover-value val-l2">93.78 / 100</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Col 2: BIC Corner Connect -->
+                                <div class="chart-col-group">
+                                    <div class="bars-container">
+                                        <div class="c-bar bar-l1" data-height="98.17%" style="height: 98.17%;">
+                                            <span class="bar-val-badge">5.89</span>
+                                        </div>
+                                        <div class="c-bar bar-l2" data-height="95.2%" style="height: 95.2%;">
+                                            <span class="bar-val-badge">95.2</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-caption">BIC Corner Connect</div>
+
+                                    <!-- Hover Popover -->
+                                    <div class="chart-popover">
+                                        <div class="popover-title">BIC Corner Connect</div>
+                                        <div class="popover-row">
+                                            <span class="popover-label">⭐ L1 (Kepuasan):</span>
+                                            <span class="popover-value val-l1">5.89 / 6.00</span>
+                                        </div>
+                                        <div class="popover-row">
+                                            <span class="popover-label">🎯 L2 (Pemahaman):</span>
+                                            <span class="popover-value val-l2">95.20 / 100</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Col 3: Seminar Ekonomi -->
+                                <div class="chart-col-group">
+                                    <div class="bars-container">
+                                        <div class="c-bar bar-l1" data-height="96.0%" style="height: 96.0%;">
+                                            <span class="bar-val-badge">5.76</span>
+                                        </div>
+                                        <div class="c-bar bar-l2" data-height="96.1%" style="height: 96.1%;">
+                                            <span class="bar-val-badge">96.1</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-caption">Seminar Ekonomi</div>
+
+                                    <!-- Hover Popover -->
+                                    <div class="chart-popover">
+                                        <div class="popover-title">Seminar Ekonomi</div>
+                                        <div class="popover-row">
+                                            <span class="popover-label">⭐ L1 (Kepuasan):</span>
+                                            <span class="popover-value val-l1">5.76 / 6.00</span>
+                                        </div>
+                                        <div class="popover-row">
+                                            <span class="popover-label">🎯 L2 (Pemahaman):</span>
+                                            <span class="popover-value val-l2">96.10 / 100</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Col 4: Forum Aparat Penegak Hukum -->
+                                <div class="chart-col-group">
+                                    <div class="bars-container">
+                                        <div class="c-bar bar-l1" data-height="98.57%" style="height: 98.57%;">
+                                            <span class="bar-val-badge">5.91</span>
+                                        </div>
+                                        <div class="c-bar bar-l2" data-height="95.0%" style="height: 95.0%;">
+                                            <span class="bar-val-badge">95.0</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-caption">Forum Kom & APH</div>
+
+                                    <!-- Hover Popover -->
+                                    <div class="chart-popover">
+                                        <div class="popover-title">Forum Aparat Penegak Hukum</div>
+                                        <div class="popover-row">
+                                            <span class="popover-label">⭐ L1 (Kepuasan):</span>
+                                            <span class="popover-value val-l1">5.914 / 6.00</span>
+                                        </div>
+                                        <div class="popover-row">
+                                            <span class="popover-label">🎯 L2 (Pemahaman):</span>
+                                            <span class="popover-value val-l2">95.00 / 100</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Y Axis: Skor L2 (0 - 100) -->
+                        <div class="chart-y-axis-right">
+                            <div class="y-ticks y-ticks-l2">
+                                <span style="bottom: 100%;">100</span>
+                                <span style="bottom: 80%;">80</span>
+                                <span style="bottom: 60%;">60</span>
+                                <span style="bottom: 40%;">40</span>
+                                <span style="bottom: 20%;">20</span>
+                                <span style="bottom: 0%;">0</span>
+                            </div>
+                            <span class="axis-title axis-title-l2">Skor L2 (1-100)</span>
+                        </div>
+                    </div>
+                    <div class="chart-legend-custom">
+                        <div class="legend-item">
+                            <span class="legend-color-dot dot-l1"></span>
+                            <span>L1: Kepuasan</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color-dot dot-l2"></span>
+                            <span>L2: Pemahaman</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Rekapitulasi per Kegiatan -->
+                <div class="dashboard-card table-card">
+                    <div class="dashboard-card-header">
+                        <h4 class="dashboard-card-title">
+                            <i class="fas fa-table-list" style="color: #C5A046;"></i> Rekapitulasi per Kegiatan
+                        </h4>
+                        <span class="chart-subtitle">Data Resmi Evaluasi 4 Kegiatan</span>
+                    </div>
+                    <div class="dashboard-table-wrap">
+                        <table class="dashboard-table">
+                            <thead>
+                                <tr>
+                                    <th>NAMA KEGIATAN</th>
+                                    <th class="text-center">NILAI L1 (1-6)</th>
+                                    <th class="text-center">NILAI L2 (1-100)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="activity-name">Kunjungan Literasi FEB Unsil</div>
+                                        <span class="activity-tag"><i class="fas fa-university"></i> Universitas Siliwangi</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge-score badge-l1">5.85 ⭐</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge-score badge-l2">93.78</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="activity-name">BIC Corner Connect</div>
+                                        <span class="activity-tag"><i class="fas fa-book-reader"></i> ToT BI Corner Connect</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge-score badge-l1">5.89 ⭐</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge-score badge-l2">95.2</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="activity-name">Seminar Ekonomi</div>
+                                        <span class="activity-tag"><i class="fas fa-chart-pie"></i> Diseminasi Kebanksentralan</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge-score badge-l1">5.76 ⭐</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge-score badge-l2">96.1</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="activity-name">Forum Aparat Penegak Hukum</div>
+                                        <span class="activity-tag"><i class="fas fa-gavel"></i> Evaluasi APH & CBP Rupiah</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge-score badge-l1">5.914 ⭐</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge-score badge-l2">95</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td>
+                                        <strong>Rata-Rata Keseluruhan</strong>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge-score badge-l1">5.85 ⭐</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge-score badge-l2">95.02</span>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
     <!-- ==================== FOOTER ==================== -->
     <footer class="site-footer">
         <div class="container">
@@ -2357,6 +3419,7 @@
                         </li>
                         <li><a href="#materi-edukasi"><i class="fas fa-angle-right"></i> Video Edukasi</a></li>
                         <li><a href="#materi-edukasi"><i class="fas fa-angle-right"></i> Modul PDF</a></li>
+                        <li><a href="#dashboard-kinerja"><i class="fas fa-angle-right"></i> Dashboard Kinerja</a></li>
                     </ul>
                 </div>
 
@@ -2462,18 +3525,16 @@
             offset: 60
         });
 
-        // Initialize Main Swiper Carousel
+        // Initialize Main Swiper Carousel (12 Slides untuk Loop Mulus Tanpa Celah)
         const mainCarousel = new Swiper('.main-carousel', {
             loop: true,
-            loopAdditionalSlides: 6,
-            loopAddBlankSlides: false,
-            observer: true,
-            observeParents: true,
-            resizeObserver: true,
             speed: 650,
             grabCursor: true,
             centeredSlides: true,
             watchSlidesProgress: true,
+            observer: true,
+            observeParents: true,
+            resizeObserver: true,
             autoplay: {
                 delay: 4500,
                 disableOnInteraction: false,
@@ -2498,21 +3559,63 @@
             pagination: {
                 el: '#carouselPagination',
                 clickable: true,
+                renderBullet: function (index, className) {
+                    // Hanya tampilkan 6 titik navigasi untuk 6 banner unik
+                    if (index < 6) {
+                        return '<span class="' + className + '" data-bullet-idx="' + index + '"></span>';
+                    }
+                    return '';
+                }
             },
             navigation: {
                 nextEl: '#carouselNext',
                 prevEl: '#carouselPrev',
+            },
+            keyboard: {
+                enabled: true,
+                onlyInViewport: true,
+            },
+            on: {
+                init: function () {
+                    syncCarouselBullets(this.realIndex);
+                },
+                slideChange: function () {
+                    syncCarouselBullets(this.realIndex);
+                },
+                autoplayTimeLeft: function (s, time, progress) {
+                    const pBar = document.getElementById('carouselProgressBar');
+                    if (pBar) {
+                        pBar.style.width = ((1 - progress) * 100) + '%';
+                    }
+                }
             }
         });
 
-        // Pastikan seluruh slide di kanan & kiri ter-render sempurna saat halaman dibuka
-        window.addEventListener('load', () => {
-            if (mainCarousel && mainCarousel.update) {
-                mainCarousel.update();
+        // Sinkronisasi 6 Bullets Pagination
+        function syncCarouselBullets(realIdx) {
+            const activeIdx = realIdx % 6;
+            const bullets = document.querySelectorAll('#carouselPagination .swiper-pagination-bullet');
+            bullets.forEach((b, i) => {
+                if (i === activeIdx) {
+                    b.classList.add('swiper-pagination-bullet-active');
+                } else {
+                    b.classList.remove('swiper-pagination-bullet-active');
+                }
+            });
+        }
+
+        // Navigasi saat bullet diklik
+        document.addEventListener('click', (e) => {
+            const bullet = e.target.closest('#carouselPagination .swiper-pagination-bullet');
+            if (bullet) {
+                const targetIdx = parseInt(bullet.getAttribute('data-bullet-idx'), 10);
+                if (!isNaN(targetIdx)) {
+                    mainCarousel.slideToLoop(targetIdx);
+                }
             }
         });
 
-        // Navigasi aman saat slide samping diklik (mencegah loop loncat)
+        // Navigasi saat slide samping diklik
         mainCarousel.on('click', (swiper) => {
             if (swiper.clickedSlide && !swiper.clickedSlide.classList.contains('swiper-slide-active')) {
                 if (swiper.clickedIndex > swiper.activeIndex) {
@@ -2520,6 +3623,13 @@
                 } else if (swiper.clickedIndex < swiper.activeIndex) {
                     swiper.slidePrev();
                 }
+            }
+        });
+
+        // Pastikan kalkulasi lebar carousel langsung ter-update sempurna
+        window.addEventListener('load', () => {
+            if (mainCarousel && mainCarousel.update) {
+                mainCarousel.update();
             }
         });
 
@@ -2553,6 +3663,9 @@
                 themeIcon.className = 'fas fa-moon';
                 themeText.textContent = 'Mode Gelap';
                 themeToggle.setAttribute('title', 'Ganti ke Mode Gelap');
+            }
+            if (typeof initPerformanceChart === 'function') {
+                initPerformanceChart();
             }
         }
 
@@ -2727,6 +3840,27 @@
                 noResults.style.display = 'none';
             }
         }
+
+        // ==================== INTERACTIVE DUAL-AXIS PERFORMANCE CHART ====================
+        function initPerformanceChart() {
+            const bars = document.querySelectorAll('.custom-dual-chart .c-bar');
+            bars.forEach((bar, idx) => {
+                const targetH = bar.getAttribute('data-height') || '0%';
+                // Staggered entrance animation
+                bar.style.height = '0%';
+                setTimeout(() => {
+                    bar.style.height = targetH;
+                }, 100 + (idx * 50));
+            });
+        }
+
+        // Jalankan chart saat halaman selesai dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            initPerformanceChart();
+        });
+        window.addEventListener('load', () => {
+            initPerformanceChart();
+        });
     </script>
 </body>
 
